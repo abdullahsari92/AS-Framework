@@ -1,2 +1,4 @@
 .vs
-.obj
+AS.Web.Api/obj/*
+
+AS.Entities/obj/*
