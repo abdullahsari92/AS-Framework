@@ -1,4 +1,8 @@
 .vs
 /AS.Web.Api/obj/*
+/AS.Web.Api/obj
+
 
 /AS.Entities/obj/*
+
+/AS.Entities/obj
