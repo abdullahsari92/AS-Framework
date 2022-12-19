@@ -6,3 +6,7 @@
 /AS.Entities/obj/*
 
 /AS.Entities/obj
+
+.vs
+obj
+bin
