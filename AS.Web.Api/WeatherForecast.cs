@@ -1,4 +1,4 @@
-namespace DpuAltYapi
+namespace AS.Web.Api
 {
     public class WeatherForecast
     {

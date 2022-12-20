@@ -1,8 +1,8 @@
-﻿using DPU.Entities.BaseEntities;
+﻿using AS.Entities.BaseEntities;
 
-namespace DPU.Entities
+namespace AS.Entities.Dtos
 {
-    public class User: BaseEntity
+    public class User : BaseEntity
     {
         public string Name { get; set; }
         public string Surname { get; set; }

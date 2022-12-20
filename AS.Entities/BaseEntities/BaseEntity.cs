@@ -1,6 +1,6 @@
-﻿
+﻿using AS.Entities.Dtos;
 
-namespace DPU.Entities.BaseEntities
+namespace AS.Entities.BaseEntities
 {
     /// <inheritdoc />
     /// <summary>
@@ -12,7 +12,7 @@ namespace DPU.Entities.BaseEntities
         /// Birincil anahtar
         /// </summary>
         public int Id { get; set; }
-       
+
         /// <summary>
         /// Oluşturulma zamanı
         /// </summary>

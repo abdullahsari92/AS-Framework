@@ -2,7 +2,7 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 
-namespace AS.Data.EntityFra
+namespace AS.Data.EntityFramework
 {
     public class EfDbContext : DbContext, IDbContext
     {
