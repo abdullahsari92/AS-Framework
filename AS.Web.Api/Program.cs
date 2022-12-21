@@ -1,3 +1,5 @@
+using AS.Data.EntityFramework;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//builder.Services.AddDbContext<EfContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -15,6 +18,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+string configuration = builder.Configuration.GetConnectionString("ConnectionStrings");
+builder.Services.AddDbContext<EfDbContext>();
 
 app.UseHttpsRedirection();
 
