@@ -33,12 +33,10 @@ namespace AS.Entities.DataEntities
         /// </summary>
         public int DisplayOrder { get; set; }
 
-
         /// <summary>
         /// Menunun üst menusu
         /// </summary>
         public virtual Menu ParentMenu { get; set; }
-
 
 
         /// <summary>

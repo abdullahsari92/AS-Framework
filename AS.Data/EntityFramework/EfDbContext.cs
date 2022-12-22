@@ -1,6 +1,6 @@
 ﻿
 using System.Reflection;
-using AS.Data.EntityFramework.Configurations;
+using AS.Core;
 using AS.Entities.DataEntities;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,8 +33,6 @@ namespace AS.Data.EntityFramework
                 modelBuilder.ApplyConfiguration(configurationInstance);
 
             }
-           // modelBuilder.ApplyConfiguration(new UserConfiguration());
-
 
             base.OnModelCreating(modelBuilder);
         }

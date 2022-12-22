@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AS.Data.EntityFramework
+﻿namespace AS.Core
 {
     public interface IDbContext : IDisposable
     {
