@@ -1,12 +1,19 @@
 ﻿
 using System.Reflection;
+using AS.Data.EntityFramework.Configurations;
+using AS.Entities.DataEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace AS.Data.EntityFramework
 {
     public class EfDbContext : DbContext, IDbContext
     {
-        public new DbSet<TEntity> Set<TEntity>() where TEntity : class => base.Set<TEntity>();
+      //  public new DbSet<TEntity> Set<TEntity>() where TEntity : class => base.Set<TEntity>();
+
+
+        public DbSet<User> Users { get; set; }
+
+       // public DbSet<Menu> Menus { get; set; }
 
         public EfDbContext(DbContextOptions options) : base(options)
         {
@@ -26,6 +33,8 @@ namespace AS.Data.EntityFramework
                 modelBuilder.ApplyConfiguration(configurationInstance);
 
             }
+           // modelBuilder.ApplyConfiguration(new UserConfiguration());
+
 
             base.OnModelCreating(modelBuilder);
         }

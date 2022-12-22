@@ -20,11 +20,21 @@ namespace AS.Entities.BaseEntities
         public DateTime CreationTime { get; set; }
 
 
-        public int CreatedById { get; set; }
+   //     public int CreatedById { get; set; }
         /// <summary>
         /// Oluşturan kullanıcı
         /// </summary>
         public virtual User CreatedBy { get; set; }
+
+        /// <summary>
+        /// Son değişiklik zamanı
+        /// </summary>
+        public DateTime UpdateTime { get; set; }
+
+        /// <summary>
+        /// Son değiştiren kullanıcı
+        /// </summary>
+        public virtual User UpdatedBy { get; set; }
 
         /// <summary>
         /// Onaylı kayıt mı?

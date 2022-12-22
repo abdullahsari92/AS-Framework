@@ -1,8 +1,12 @@
 using AS.Data.EntityFramework;
+using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+string configuration = builder.Configuration.GetConnectionString("MsSqlConnection");
+builder.Services.AddDbContext<EfDbContext>(options => options.UseSqlServer(configuration));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -19,8 +23,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-string configuration = builder.Configuration.GetConnectionString("ConnectionStrings");
-builder.Services.AddDbContext<EfDbContext>();
 
 app.UseHttpsRedirection();
 
