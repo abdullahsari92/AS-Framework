@@ -2,9 +2,9 @@
 
 namespace AS.Entities.DataEntities
 {
-    public class RoleUserLine : LineBaseEntity
+    public class RolePermissionLine : LineBaseEntity
     {
         public virtual Role Role { get; set; }
-        public virtual User User { get; set; }
+        public virtual Permission Permission { get; set; }
     }
 }

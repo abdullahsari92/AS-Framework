@@ -12,6 +12,9 @@ namespace AS.Entities.DataEntities
         public string Email { get; set; }
 
 
+
+        public virtual ICollection<RoleUserLine> RoleUserLines { get; set; }
+
         public virtual ICollection<User> UsersCreatedBy { get; set; }
 
         public virtual ICollection<User> UsersUpdatedBy { get; set; }
@@ -23,5 +26,14 @@ namespace AS.Entities.DataEntities
         public virtual ICollection<Menu> MenusCreatedBy { get; set; }
 
         public virtual ICollection<Role> RolesUpdatedBy { get; set; }
+
+        public virtual ICollection<Permission> PermissionsCreatedBy { get; set; }
+        public virtual ICollection<RolePermissionLine> RolePermissionLinesCreatedBy { get; set; }
+        public virtual ICollection<RolePermissionLine> RolePermissionLinesUpdatedBy { get; set; }
+
+        public virtual ICollection<RoleUserLine> RoleUserLinesCreatedBy { get; set; }
+        public virtual ICollection<RoleUserLine> RoleUserLinesUpdatedBy { get; set; }
+
+
     }
 }
