@@ -2,7 +2,7 @@ using AS.Entities.DataEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Adfnet.Data.DataAccess.EntityFramework.Configurations;
+namespace AS.Data.EntityFramework.Configurations;
 
 /// <inheritdoc />
 /// <summary>
