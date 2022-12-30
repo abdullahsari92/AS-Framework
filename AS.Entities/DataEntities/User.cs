@@ -28,6 +28,8 @@ namespace AS.Entities.DataEntities
         public virtual ICollection<Role> RolesUpdatedBy { get; set; }
 
         public virtual ICollection<Permission> PermissionsCreatedBy { get; set; }
+        public virtual ICollection<Permission> PermissionsUpdatedBy{ get; set; }
+
         public virtual ICollection<RolePermissionLine> RolePermissionLinesCreatedBy { get; set; }
         public virtual ICollection<RolePermissionLine> RolePermissionLinesUpdatedBy { get; set; }
 
