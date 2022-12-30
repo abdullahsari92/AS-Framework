@@ -12,7 +12,7 @@ internal class RoleUserLineConfiguration : IEntityTypeConfiguration<RoleUserLine
 {
     public void Configure(EntityTypeBuilder<RoleUserLine> builder)
     {
-        builder.ToTable("RoleUserLines");
+        builder.ToTable("RoleUserLines", "AS");
 
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).IsRequired();

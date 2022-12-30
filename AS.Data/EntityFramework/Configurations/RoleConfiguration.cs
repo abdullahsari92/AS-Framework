@@ -13,7 +13,7 @@ internal class RoleConfiguration : IEntityTypeConfiguration<Role>
     public void Configure(EntityTypeBuilder<Role> builder)
     {
         // Tablo adı
-        builder.ToTable("Roles");
+        builder.ToTable("Roles", "AS");
 
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).IsRequired();

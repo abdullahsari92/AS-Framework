@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Adfnet.Core
+﻿namespace AS.Core
 {
     public interface IEntity
     {

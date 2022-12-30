@@ -44,9 +44,9 @@ namespace AS.Entities.DataEntities
         /// </summary>
         public virtual ICollection<Menu> ChildMenus { get; set; }
 
-        ///// <summary>
-        ///// Menunun rollerle ilişkileri
-        ///// </summary>
-        //public virtual ICollection<PermissionMenuLine> PermissionMenuLines { get; set; }
+        /// <summary>
+        /// Menunun rollerle ilişkileri
+        /// </summary>
+        public virtual ICollection<PermissionMenuLine> PermissionMenuLines { get; set; }
     }
 }

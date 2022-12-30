@@ -14,7 +14,7 @@ namespace AS.Data.EntityFramework.Configurations
         public void Configure(EntityTypeBuilder<Permission> builder)
         {
             // Tablo adı
-            builder.ToTable("Permissions");
+            builder.ToTable("Permissions", "AS");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).IsRequired();

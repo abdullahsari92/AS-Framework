@@ -36,6 +36,9 @@ namespace AS.Entities.DataEntities
         public virtual ICollection<RoleUserLine> RoleUserLinesCreatedBy { get; set; }
         public virtual ICollection<RoleUserLine> RoleUserLinesUpdatedBy { get; set; }
 
+        public virtual ICollection<PermissionMenuLine> PermissionMenuLinesCreatedBy { get; set; }
+        public virtual ICollection<PermissionMenuLine> PermissionMenuLinesUpdatedBy { get; set; }
+
 
     }
 }

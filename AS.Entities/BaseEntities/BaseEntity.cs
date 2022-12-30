@@ -1,4 +1,4 @@
-﻿using Adfnet.Core;
+﻿using AS.Core;
 using AS.Entities.DataEntities;
 
 namespace AS.Entities.BaseEntities

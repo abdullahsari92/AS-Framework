@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Adfnet.Core.Helpers;
+﻿namespace AS.Core.Helpers;
 
 public static class GuidHelper
 {

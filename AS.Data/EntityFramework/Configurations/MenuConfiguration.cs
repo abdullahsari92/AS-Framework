@@ -13,7 +13,7 @@ internal class MenuConfiguration : IEntityTypeConfiguration<Menu>
     public void Configure(EntityTypeBuilder<Menu> builder)
     {
 
-        builder.ToTable("Menus");
+        builder.ToTable("Menus", "AS");
 
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).IsRequired();
