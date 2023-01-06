@@ -4,7 +4,7 @@ using AS.Entities.DataEntities;
 
 namespace AS.Business
 {
-    public class UserManager : IUserManager
+    public class UserManager : IUserService
     {
         private readonly IRepository<User> _repositoryUser;
 

@@ -3,7 +3,7 @@ using AS.Entities.DataEntities;
 
 namespace AS.Business.Interfaces
 {
-    public interface IUserManager
+    public interface IUserService
     {
         List<User> GetAll();
         User GetById(int id);
