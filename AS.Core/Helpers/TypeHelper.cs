@@ -121,21 +121,22 @@ namespace AS.Core.Helpers
 
         }
 
+        //TODO:buna bakılacak
 
-        public static T DeserializeFromString<T>(this string data)
-        {
+        //public static T DeserializeFromString<T>(this string data)
+        //{
 
-            var bytes = Convert.FromBase64String(data);
+        //    var bytes = Convert.FromBase64String(data);
 
-            using var stream = new MemoryStream(bytes);
+        //    using var stream = new MemoryStream(bytes);
 
-            var formatter = new BinaryFormatter();
+        //    var formatter = new BinaryFormatter();
 
-            stream.Seek(0, SeekOrigin.Begin);
+        //    stream.Seek(0, SeekOrigin.Begin);
 
-            return (T)formatter.Deserialize(stream);
+        //    return (T)formatter.Deserialize(stream);
 
-        }
+        //}
 
         public static string SerializeToString<T>(this T data)
         {
@@ -144,7 +145,8 @@ namespace AS.Core.Helpers
 
             var formatter = new BinaryFormatter();
 
-            formatter.Serialize(stream, data);
+            //TODO:buna bakılacak
+           // formatter.Serialize(stream, data);
 
             stream.Flush();
 

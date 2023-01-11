@@ -1,4 +1,5 @@
 using AS.Business;
+using AS.Business.AutoMapperProfile;
 using AS.Business.DependencyResolvers;
 using AS.Business.Interfaces;
 using AS.Core;
@@ -6,6 +7,7 @@ using AS.Core.Extensions;
 using AS.Core.Utilities.IoC;
 using AS.Data.EntityFramework;
 using AS.Entities.DataEntities;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -27,10 +29,20 @@ builder.Services.AddSwaggerGen();
 //    new BusinessModule(),
 //});
 
+#region AutoMapper
+var mappingConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new BusinessProfile());
+});
+IMapper mapper = mappingConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
+#endregion AutoMapper
 
 builder.Services.AddTransient<IUserService, UserManager>();
 builder.Services.AddScoped<IRepository<User>, Repository<User>>();
 builder.Services.AddScoped<IRepository<RoleUserLine>, Repository<RoleUserLine>>();
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
 //builder.Services.AddDbContext<EfContext>();

@@ -1,5 +1,6 @@
 ﻿using AS.Business.Interfaces;
 using AS.Entities.DataEntities;
+using AS.Entities.UIModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,8 +21,8 @@ namespace AS.Web.Api.Controllers
         [HttpGet(Name = "GetAll")]
         public IActionResult GetAll()
         {
-         
 
+            
             var userList = _userManager.GetAll();
 
 
@@ -29,25 +30,24 @@ namespace AS.Web.Api.Controllers
         }
 
 
-        [HttpGet(Name = "Add")]
-        public IActionResult Add()
+        [HttpPost(Name = "Add")]
+        public IActionResult Add([FromBody] UserModel userModel)
         {
-            var user = new User()
-            {
-                FirstName = "abdullah",
-                LastName = "sarı",
-                Email = "abdullahsari92@gmail.com",
-                CreationTime = DateTime.Now,
-                UpdateTime = DateTime.Now,
-                IsApproved = true,
-                Password = "abcd12",
-                Username = "abdullah.sari"
+            //var user = new User()
+            //{
+            //    FirstName = "abdullah",
+            //    LastName = "sarı",
+            //    Email = "abdullahsari92@gmail.com",
+            //    CreationTime = DateTime.Now,
+            //    UpdateTime = DateTime.Now,
+            //    IsApproved = true,
+            //    Password = "abcd12",
+            //    Username = "abdullah.sari"
 
-            };
-            user.CreatedBy = new User() { Id = 21 };
-            user.UpdatedBy = new User() { Id = 21 }; ;
+            //};
+        
 
-            var deger = _userManager.Insert(user);
+            var deger = _userManager.Insert(userModel);
 
            // var userList = _userManager.Insert(user);
 
