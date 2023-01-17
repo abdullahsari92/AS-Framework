@@ -5,8 +5,8 @@ using AS.Business.Interfaces;
 using AS.Core;
 using AS.Core.Extensions;
 using AS.Core.Utilities.IoC;
-using AS.Data.EntityFramework;
-using AS.Entities.DataEntities;
+using AS.Data;
+using AS.Data.Entity;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,6 +35,7 @@ var mappingConfig = new MapperConfiguration(mc =>
     mc.AddProfile(new BusinessProfile());
 });
 IMapper mapper = mappingConfig.CreateMapper();
+
 builder.Services.AddSingleton(mapper);
 #endregion AutoMapper
 

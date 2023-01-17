@@ -1,7 +1,5 @@
 ﻿using AS.Business.Interfaces;
-using AS.Entities.DataEntities;
-using AS.Entities.UIModels;
-using Microsoft.AspNetCore.Http;
+using AS.Entities.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AS.Web.Api.Controllers
@@ -31,7 +29,7 @@ namespace AS.Web.Api.Controllers
 
 
         [HttpPost(Name = "Add")]
-        public IActionResult Add([FromBody] UserModel userModel)
+        public IActionResult Add([FromBody] UserDto userDto)
         {
             //var user = new User()
             //{
@@ -47,7 +45,7 @@ namespace AS.Web.Api.Controllers
             //};
         
 
-            var deger = _userManager.Insert(userModel);
+            var deger = _userManager.Insert(userDto);
 
            // var userList = _userManager.Insert(user);
 
