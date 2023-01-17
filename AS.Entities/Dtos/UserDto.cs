@@ -1,9 +1,6 @@
-﻿using AS.Entities.BaseEntities;
-using AS.Entities.DataEntities;
-
-namespace AS.Entities.UIModels
+﻿namespace AS.Entities.Dtos
 {
-    public class UserModel
+    public class UserDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
