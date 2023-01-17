@@ -2,7 +2,7 @@
 using AS.Core;
 using Microsoft.EntityFrameworkCore;
 
-namespace AS.Data.EntityFramework
+namespace AS.Data
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
     {
@@ -164,12 +164,12 @@ namespace AS.Data.EntityFramework
             return entry.Entity;
         }
 
-   
+
 
         public virtual void UpdateRange(IEnumerable<TEntity> entities, bool autoSaveIsNotActive = false)
         {
             _dbSet.UpdateRange(entities);
-            if(!autoSaveIsNotActive)
+            if (!autoSaveIsNotActive)
             {
                 _context.SaveChanges();
             }
@@ -213,7 +213,7 @@ namespace AS.Data.EntityFramework
             return await _context.SaveChangesAsync();
         }
 
-     
+
         ~Repository()
         {
             Dispose(false);

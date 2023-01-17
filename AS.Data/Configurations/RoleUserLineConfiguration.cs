@@ -1,8 +1,8 @@
-using AS.Entities.DataEntities;
+using AS.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AS.Data.EntityFramework.Configurations;
+namespace AS.Data.Configurations;
 
 /// <inheritdoc />
 /// <summary>

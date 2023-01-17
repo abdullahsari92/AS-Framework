@@ -1,19 +1,19 @@
 ﻿
 using System.Reflection;
 using AS.Core;
-using AS.Entities.DataEntities;
+using AS.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 
-namespace AS.Data.EntityFramework
+namespace AS.Data
 {
     public class EfDbContext : DbContext, IDbContext
     {
-      //  public new DbSet<TEntity> Set<TEntity>() where TEntity : class => base.Set<TEntity>();
+        //  public new DbSet<TEntity> Set<TEntity>() where TEntity : class => base.Set<TEntity>();
 
 
         public DbSet<User> Users { get; set; }
 
-       // public DbSet<Menu> Menus { get; set; }
+        // public DbSet<Menu> Menus { get; set; }
 
         public EfDbContext(DbContextOptions options) : base(options)
         {

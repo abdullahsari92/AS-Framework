@@ -1,8 +1,8 @@
-﻿using AS.Entities.DataEntities;
+﻿using AS.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AS.Data.EntityFramework.Configurations;
+namespace AS.Data.Configurations;
 
 /// <inheritdoc />
 /// <summary>
@@ -23,8 +23,8 @@ internal class RoleConfiguration : IEntityTypeConfiguration<Role>
         builder.HasOne(x => x.CreatedBy).WithMany(y => y.RolesCreatedBy).IsRequired().OnDelete(DeleteBehavior.Restrict);
         builder.Property(x => x.UpdateTime).IsRequired();
         builder.HasOne(x => x.UpdatedBy).WithMany(y => y.RolesUpdatedBy).IsRequired().OnDelete(DeleteBehavior.Restrict);
-            
-      
+
+
         builder.Property(x => x.Name).IsRequired().HasColumnType("varchar(512)");
         builder.Property(x => x.Description).HasColumnType("varchar(512)");
         builder.Property(x => x.Level).IsRequired();
