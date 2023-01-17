@@ -1,7 +1,7 @@
 ﻿
 using System.Reflection;
 using AS.Core;
-using AS.Data.Entity;
+using AS.Entities.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace AS.Data

@@ -1,7 +1,8 @@
 using AS.Business.Interfaces;
 using AS.Core;
-using AS.Data.Entity;
+using AS.Core.Helpers;
 using AS.Entities.Dtos;
+using AS.Entities.Entity;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 
@@ -41,15 +42,14 @@ namespace AS.Business
         }
 
 
-        public User Insert(UserDto user)
+        public User Insert(UserDto userDto)
         {
             //   _userValidator.Validate(user);
 
-            if (_repositoryUser.IsExist(x => x.Username == user.Username))
+            if (_repositoryUser.IsExist(x => x.Username == userDto.Username))
                 throw new Exception("Bu user daha önce eklenmiþtir.");
 
-            //user = BaseEntityHelper.SetBaseEntitiy(user);
-
+            user = BaseEntityHelper.SetBaseEntitiy(user);
 
             return new User();
 

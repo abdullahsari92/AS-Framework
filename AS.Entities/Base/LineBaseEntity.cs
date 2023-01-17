@@ -1,7 +1,6 @@
 ﻿using AS.Core;
-using AS.Data.Entity;
 
-namespace AS.Data.BaseEntities
+namespace AS.Entities.Base
 {
     /// <inheritdoc />
     /// <summary>

@@ -1,6 +1,4 @@
-﻿using AS.Data.BaseEntities;
-
-namespace AS.Data.Entity
+﻿namespace AS.Entities.Entity
 {
     public class User : BaseEntity
     {

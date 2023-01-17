@@ -1,5 +1,5 @@
-﻿using AS.Data.Entity;
-using AS.Entities.Dtos;
+﻿using AS.Entities.Dtos;
+using AS.Entities.Entity;
 using AutoMapper;
 
 namespace AS.Business.AutoMapperProfile

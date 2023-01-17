@@ -6,7 +6,7 @@ using AS.Core;
 using AS.Core.Extensions;
 using AS.Core.Utilities.IoC;
 using AS.Data;
-using AS.Data.Entity;
+//using AS.Data.Entity;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 

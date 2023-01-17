@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
-using AS.Data.Entity;
 using AS.Entities.Dtos;
+using AS.Entities.Entity;
 
 namespace AS.Business.Interfaces
 {
