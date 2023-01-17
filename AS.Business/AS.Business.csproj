@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AS.Data\AS.Data.csproj" />
     <ProjectReference Include="..\AS.Entities\AS.Entities.csproj" />
   </ItemGroup>
 

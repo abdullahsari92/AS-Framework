@@ -1,5 +1,5 @@
-﻿using AS.Entities.DataEntities;
-using AS.Entities.UIModels;
+﻿using AS.Data.Entity;
+using AS.Entities.Dtos;
 using AutoMapper;
 
 namespace AS.Business.AutoMapperProfile
@@ -8,7 +8,7 @@ namespace AS.Business.AutoMapperProfile
     {
         public BusinessProfile()
         {
-            CreateMap<User, UserModel>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
             
         }
     }

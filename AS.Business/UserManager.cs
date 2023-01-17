@@ -1,7 +1,7 @@
 using AS.Business.Interfaces;
 using AS.Core;
-using AS.Entities.DataEntities;
-using AS.Entities.UIModels;
+using AS.Data.Entity;
+using AS.Entities.Dtos;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 
@@ -25,9 +25,9 @@ namespace AS.Business
             // _userValidator = userValidator;
         }
 
-        public List<UserModel> GetAll()
+        public List<UserDto> GetAll()
         {
-            return _repositoryUser.GetAll().ProjectTo<UserModel>(_mapper.ConfigurationProvider).ToList() ?? new List<UserModel>();
+            return _repositoryUser.GetAll().ProjectTo<UserDto>(_mapper.ConfigurationProvider).ToList() ?? new List<UserDto>();
         }
 
         public User GetById(int id)
@@ -41,7 +41,7 @@ namespace AS.Business
         }
 
 
-        public User Insert(UserModel user)
+        public User Insert(UserDto user)
         {
             //   _userValidator.Validate(user);
 
