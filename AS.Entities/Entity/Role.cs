@@ -1,4 +1,6 @@
-﻿namespace AS.Entities.Entity
+﻿using AS.Entities.Base;
+
+namespace AS.Entities.Entity
 {
     public class Role : BaseEntity
     {

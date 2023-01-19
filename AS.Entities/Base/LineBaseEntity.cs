@@ -1,4 +1,5 @@
 ﻿using AS.Core;
+using AS.Entities.Entity;
 
 namespace AS.Entities.Base
 {

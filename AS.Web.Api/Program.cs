@@ -1,11 +1,9 @@
 using AS.Business;
 using AS.Business.AutoMapperProfile;
-using AS.Business.DependencyResolvers;
 using AS.Business.Interfaces;
 using AS.Core;
-using AS.Core.Extensions;
-using AS.Core.Utilities.IoC;
 using AS.Data;
+using AS.Entities.Entity;
 //using AS.Data.Entity;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;

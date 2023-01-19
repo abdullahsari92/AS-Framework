@@ -49,11 +49,12 @@ namespace AS.Business
             if (_repositoryUser.IsExist(x => x.Username == userDto.Username))
                 throw new Exception("Bu user daha önce eklenmiþtir.");
 
+
+           var user = _mapper.Map(userDto, new User());
+
             user = BaseEntityHelper.SetBaseEntitiy(user);
+            return _repositoryUser.Insert(user);
 
-            return new User();
-
-            //return _repositoryUser.Insert(user);
         }
 
         public void Update(User user)

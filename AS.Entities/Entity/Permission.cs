@@ -1,3 +1,5 @@
+using AS.Entities.Base;
+
 namespace AS.Entities.Entity
 {
     /// <inheritdoc />

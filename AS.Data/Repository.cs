@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using AS.Core;
+using AS.Core.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace AS.Data
@@ -96,7 +97,6 @@ namespace AS.Data
 
         public void DeleteRange(IEnumerable<TEntity> entities, bool autoSaveIsNotActive = false)
         {
-            _context.Set<TEntity>().AddRange(entities);
 
             foreach (var entity in entities)
             {

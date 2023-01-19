@@ -1,4 +1,5 @@
 ﻿using AS.Entities.Base;
+using AS.Entities.Entity;
 
 namespace AS.Core.Helpers
 {
@@ -13,10 +14,15 @@ namespace AS.Core.Helpers
         /// <returns></returns>
         public static T SetBaseEntitiyNoExten<T>(T Item) where T : BaseEntity, new()
         {
-            var activeIdentity = CoreSettings.ActiveIdentity;
+            //TODO:Bakılacak
+            //var activeIdentity = CoreSettings.ActiveIdentity;
+            //Item.CreatedById = activeIdentity.UserId;
+
+            Item.CreatedBy = new User() { Id = 21 };
+            Item.UpdatedBy = new User() { Id = 23 };
 
             Item.CreationTime = DateTime.Now;
-            Item.CreatedById = activeIdentity.UserId;
+            Item.UpdateTime = DateTime.Now;
 
 
             return Item;
@@ -30,11 +36,15 @@ namespace AS.Core.Helpers
         /// <returns></returns>
         public static T SetBaseEntitiy<T>(this T Item) where T : BaseEntity, new()
         {
-            var activeIdentity = CoreSettings.ActiveIdentity;
+            //TODO:Bakılacak
+            //var activeIdentity = CoreSettings.ActiveIdentity;
 
             Item.CreationTime = DateTime.Now;
-            Item.CreatedById = activeIdentity.UserId;
-            Item.DurumId = EnumKayitDurum.Olusturuldu.GetHashCode();
+            Item.UpdateTime = DateTime.Now;
+
+
+            Item.CreatedBy = new User() { Id = 23 };
+            Item.UpdatedBy = new User() { Id = 23 };
 
 
             return Item;
