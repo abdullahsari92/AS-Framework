@@ -1,5 +1,6 @@
 ﻿using AS.Business.Interfaces;
 using AS.Entities.Dtos;
+using AS.Entities.Entity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AS.Web.Api.Controllers
@@ -43,11 +44,20 @@ namespace AS.Web.Api.Controllers
             //    Username = "abdullah.sari"
 
             //};
-        
+            User deger = new User();     
+            try
+            {
+                deger = _userManager.Insert(userDto);
+            }
+            catch (Exception ex)
+            {
 
-            var deger = _userManager.Insert(userDto);
+                return Ok(deger);
 
-           // var userList = _userManager.Insert(user);
+            }
+
+
+            // var userList = _userManager.Insert(user);
 
             return Ok(deger);
         }
