@@ -62,5 +62,28 @@ namespace AS.Web.Api.Controllers
             return Ok(deger);
         }
 
+
+
+        [HttpPost(Name = "Update")]
+        public IActionResult Update([FromBody] UserDto userDto)
+        {
+      
+            User deger = new User();
+            try
+            {
+                _userManager.Update(userDto);
+            }
+            catch (Exception ex)
+            {
+
+                return Ok(deger);
+
+            }
+
+
+            // var userList = _userManager.Insert(user);
+
+            return Ok(deger);
+        }
     }
 }

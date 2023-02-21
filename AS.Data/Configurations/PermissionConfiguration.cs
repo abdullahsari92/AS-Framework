@@ -17,7 +17,7 @@ namespace AS.Data.Configurations
             builder.ToTable("Permissions", "AS");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).IsRequired();
+           // builder.Property(x => x.Id).IsRequired();
             builder.Property(x => x.IsApproved).IsRequired();
             builder.Property(x => x.CreationTime).IsRequired();
             builder.HasOne(x => x.CreatedBy).WithMany(y => y.PermissionsCreatedBy).IsRequired().OnDelete(DeleteBehavior.Restrict);

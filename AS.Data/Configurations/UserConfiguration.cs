@@ -16,7 +16,7 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
         builder.ToTable("Users", "AS");
 
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).IsRequired();
+        //builder.Property(x => x.Id).IsRequired();
         builder.Property(x => x.IsApproved).IsRequired();
         builder.Property(x => x.CreationTime).IsRequired();
         builder.Property(x => x.UpdateTime).IsRequired();

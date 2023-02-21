@@ -12,7 +12,7 @@ namespace AS.Entities.Base
         /// <summary>
         /// Birincil anahtar
         /// </summary>
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Oluşturulma zamanı
@@ -20,7 +20,7 @@ namespace AS.Entities.Base
         public DateTime CreationTime { get; set; }
 
 
-   //     public int CreatedById { get; set; }
+        //public int CreatedById { get; set; }
         /// <summary>
         /// Oluşturan kullanıcı
         /// </summary>

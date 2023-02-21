@@ -15,8 +15,7 @@ internal class MenuConfiguration : IEntityTypeConfiguration<Menu>
 
         builder.ToTable("Menus", "AS");
 
-        builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).IsRequired();
+        builder.HasKey(x => x.Id);       
         builder.Property(x => x.DisplayOrder).IsRequired();
         builder.HasIndex(x => x.DisplayOrder).IsUnique(false).HasName("IX_MenuDisplayOrder");
         builder.Property(x => x.IsApproved).IsRequired();

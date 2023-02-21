@@ -16,7 +16,7 @@ internal class RoleConfiguration : IEntityTypeConfiguration<Role>
         builder.ToTable("Roles", "AS");
 
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).IsRequired();
+        //builder.Property(x => x.Id).IsRequired();
 
         builder.Property(x => x.IsApproved).IsRequired();
         builder.Property(x => x.CreationTime).IsRequired();

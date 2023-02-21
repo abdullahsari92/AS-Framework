@@ -18,8 +18,8 @@ namespace AS.Core.Helpers
             //var activeIdentity = CoreSettings.ActiveIdentity;
             //Item.CreatedById = activeIdentity.UserId;
 
-            Item.CreatedBy = new User() { Id = 21 };
-            Item.UpdatedBy = new User() { Id = 21 };
+            Item.CreatedBy = new User() { Id = new Guid() };
+            Item.UpdatedBy = new User() { Id = new Guid() };
 
             Item.CreationTime = DateTime.Now;
             Item.UpdateTime = DateTime.Now;
@@ -43,8 +43,8 @@ namespace AS.Core.Helpers
             Item.UpdateTime = DateTime.Now;
 
 
-            Item.CreatedBy = new User() { Id = 21 };
-            Item.UpdatedBy = new User() { Id = 21 };
+            Item.CreatedBy = new User() { Id = new Guid() };
+            Item.UpdatedBy = new User() { Id = new Guid() };
 
 
             return Item;

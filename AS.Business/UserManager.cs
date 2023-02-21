@@ -31,14 +31,17 @@ namespace AS.Business
             return _repositoryUser.GetAll().ProjectTo<UserDto>(_mapper.ConfigurationProvider).ToList() ?? new List<UserDto>();
         }
 
-        public User GetById(int id)
+        public User GetById(Guid id)
         {
             return _repositoryUser.GetAll().FirstOrDefault(x => x.Id == id);
         }
 
-        public List<RoleUserLine> GetRoleUser(int userId)
+        public List<RoleUserLine> GetRoleUser(Guid userId)
         {
-            return _repositoryRoleUser.GetAll().Where(x => x.Id == userId).ToList();
+            //return _repositoryRoleUser.GetAll().Where(x => x.Id == userId).ToList();
+
+            return null;
+                
         }
 
 
@@ -53,16 +56,25 @@ namespace AS.Business
            var user = _mapper.Map(userDto, new User());
 
             user = BaseEntityHelper.SetBaseEntitiy(user);
+
+            user.Id = new Guid();
+          //  user.IsApproved = 1;
             return _repositoryUser.Insert(user);
 
         }
 
-        public void Update(User user)
+        public void Update(UserDto userDto)
         {
+              
 
+             var user = GetById(userDto.Id);
+
+            user = _mapper.Map(userDto, user);
+         
+             _repositoryUser.Update(user);
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             var User = GetById(id);
 

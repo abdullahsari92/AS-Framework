@@ -7,12 +7,12 @@ namespace AS.Business.Interfaces
     public interface IUserService
     {
         List<UserDto> GetAll();
-        User GetById(int id);
-        List<RoleUserLine> GetRoleUser(int userId);
+        User GetById(Guid id);
+        List<RoleUserLine> GetRoleUser(Guid userId);
        // IEnumerable<User> GetByFilter(UserFiltre filtre);
         User Insert(UserDto userDto);
-        void Update(User user);
-        void Delete(int id);
+        void Update(UserDto user);
+        void Delete(Guid id);
 
 
 
