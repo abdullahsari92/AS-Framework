@@ -29,35 +29,21 @@ namespace AS.Web.Api.Controllers
         }
 
 
-        [HttpPost(Name = "Add")]
+        [HttpPost]
         public IActionResult Add([FromBody] UserDto userDto)
         {
-            //var user = new User()
-            //{
-            //    FirstName = "abdullah",
-            //    LastName = "sarı",
-            //    Email = "abdullahsari92@gmail.com",
-            //    CreationTime = DateTime.Now,
-            //    UpdateTime = DateTime.Now,
-            //    IsApproved = true,
-            //    Password = "abcd12",
-            //    Username = "abdullah.sari"
+            
 
-            //};
-            User deger = new User();     
+          User deger = new User();     
             try
             {
                 deger = _userManager.Insert(userDto);
             }
             catch (Exception ex)
             {
-
-                return Ok(deger);
+                 return Ok(deger);
 
             }
-
-
-            // var userList = _userManager.Insert(user);
 
             return Ok(deger);
         }

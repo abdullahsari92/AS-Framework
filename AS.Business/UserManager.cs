@@ -57,7 +57,10 @@ namespace AS.Business
 
             user = BaseEntityHelper.SetBaseEntitiy(user);
 
-            user.Id = new Guid();
+            user.CreatedBy = new User() { Id=user.Id };
+            user.UpdatedBy = new User() { Id = user.Id };
+
+           // user.Id = new Guid();
           //  user.IsApproved = 1;
             return _repositoryUser.Insert(user);
 
