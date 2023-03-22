@@ -8,7 +8,10 @@ namespace AS.Business.DependencyResolvers
     {
         public void Load(IServiceCollection services)
         {
-            services.AddScoped<IUserService, UserManager>();
+            //Transient her defasında yeni bir instance(örnek) oluşturuyor.
+            services.AddTransient<IUserService, UserManager>();
+            services.AddTransient<IPermissionService, PermissionManager>();
+                  
 
         }
     }

@@ -9,8 +9,9 @@ namespace AS.Entities.Entity
 
         public int Level { get; set; }
 
-
         public virtual ICollection<RolePermissionLine> RolePermissionLines { get; set; }
         public virtual ICollection<RoleUserLine> RoleUserLines { get; set; }
+
     }
+
 }

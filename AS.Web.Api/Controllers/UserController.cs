@@ -1,4 +1,5 @@
 ﻿using AS.Business.Interfaces;
+using AS.Core.ValueObjects;
 using AS.Entities.Dtos;
 using AS.Entities.Entity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,27 +18,28 @@ namespace AS.Web.Api.Controllers
         }
 
         
-        [HttpGet(Name = "GetAll")]
-        public IActionResult GetAll()
+       // [HttpGet(Name = "GetAll")]
+        public async Task<ActionResult<Core.IResult>> GetAll()
         {
 
             
-            var userList = _userManager.GetAll();
+            var userList = await _userManager.GetAll();
 
 
-            return Ok(userList);
+          return  new SuccessDataResult<ListModel<UserDto>>(userList);
+           
         }
 
 
         [HttpPost]
-        public IActionResult Add([FromBody] UserDto userDto)
+        public async Task<IActionResult> Add([FromBody] UserDto userDto)
         {
-            
 
-          User deger = new User();     
+
+            UserDto deger = new UserDto();     
             try
             {
-                deger = _userManager.Insert(userDto);
+                deger = await _userManager.Insert(userDto);
             }
             catch (Exception ex)
             {
@@ -50,14 +52,14 @@ namespace AS.Web.Api.Controllers
 
 
 
-        [HttpPost(Name = "Update")]
-        public IActionResult Update([FromBody] UserDto userDto)
+        [HttpPost]
+        public async Task<IActionResult> Update([FromBody] UserDto userDto)
         {
       
             User deger = new User();
             try
             {
-                _userManager.Update(userDto);
+                 _userManager.Update(userDto);
             }
             catch (Exception ex)
             {
@@ -70,6 +72,28 @@ namespace AS.Web.Api.Controllers
             // var userList = _userManager.Insert(user);
 
             return Ok(deger);
+        }
+
+
+        [HttpPost]
+        public IActionResult Delete([FromBody] Guid Id)
+        {
+
+            try
+            {
+                _userManager.Delete(Id);
+            }
+            catch (Exception ex)
+            {
+
+                return Ok();
+
+            }
+
+
+            // var userList = _userManager.Insert(user);
+
+            return Ok(true);
         }
     }
 }

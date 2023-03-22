@@ -74,7 +74,7 @@ namespace AS.Data
         /// </summary>
         /// <param name="asNoTracking"></param>
         /// <returns></returns>
-        public IQueryable<TEntity> GetAll(bool asNoTracking = false)
+        public async Task<IQueryable<TEntity>> GetAll(bool asNoTracking = false)
         {
             return asNoTracking
                 ? _dbSet.AsNoTracking()
@@ -93,6 +93,9 @@ namespace AS.Data
                 ? _dbSet.AsNoTracking().Where(filter)
                 : _dbSet.Where(filter);
         }
+
+    
+
 
 
         public void DeleteRange(IEnumerable<TEntity> entities, bool autoSaveIsNotActive = false)
@@ -122,7 +125,7 @@ namespace AS.Data
 
         public async Task<IQueryable<TEntity>> GetAsync()
         {
-            return await Task.FromResult(GetAll());
+            return await Task.FromResult(await GetAll());
         }
 
         public TEntity Insert(TEntity entity, bool autoSaveIsNotActive = false)
@@ -185,8 +188,9 @@ namespace AS.Data
             return await affectedEntity;
         }
 
-        public void Delete(TEntity entity, bool autoSaveIsNotActive = false)
+        public void Delete(Guid Id, bool autoSaveIsNotActive = false)
         {
+             var entity=    Get(p => p.Id == Id); 
             _dbSet.Remove(entity);
             if (!autoSaveIsNotActive)
             {

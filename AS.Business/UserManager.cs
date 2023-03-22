@@ -1,10 +1,12 @@
 using AS.Business.Interfaces;
 using AS.Core;
 using AS.Core.Helpers;
+using AS.Core.ValueObjects;
 using AS.Entities.Dtos;
 using AS.Entities.Entity;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace AS.Business
 {
@@ -26,14 +28,26 @@ namespace AS.Business
             // _userValidator = userValidator;
         }
 
-        public List<UserDto> GetAll()
+        public async Task<ListModel<UserDto>> GetAll()
         {
-            return _repositoryUser.GetAll().ProjectTo<UserDto>(_mapper.ConfigurationProvider).ToList() ?? new List<UserDto>();
+
+           //var FirstOrDefault =  _repositoryUser.GetAll().FirstOrDefault(p => p.LastName == "dag33");
+
+           //var LastOrDefault =  _repositoryUser.GetAll().SingleOrDefault(p => p.LastName == "daddd");
+
+
+            var listModel =  new ListModel<UserDto>();
+            var users = await _repositoryUser.GetAll();
+            listModel.Items = await users.ProjectTo<UserDto>(_mapper.ConfigurationProvider).ToListAsync();
+
+        
+            return listModel;
         }
 
-        public User GetById(Guid id)
+        public async Task<UserDto> GetById(Guid id)
         {
-            return _repositoryUser.GetAll().FirstOrDefault(x => x.Id == id);
+            return null;
+           // return await _repositoryUser.GetAll().ProjectTo<UserDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync(x => x.Id == id) ?? new UserDto(); 
         }
 
         public List<RoleUserLine> GetRoleUser(Guid userId)
@@ -45,7 +59,7 @@ namespace AS.Business
         }
 
 
-        public User Insert(UserDto userDto)
+        public async Task<UserDto> Insert(UserDto userDto)
         {
             //   _userValidator.Validate(user);
 
@@ -60,9 +74,12 @@ namespace AS.Business
             user.CreatedBy = new User() { Id=user.Id };
             user.UpdatedBy = new User() { Id = user.Id };
 
-           // user.Id = new Guid();
-          //  user.IsApproved = 1;
-            return _repositoryUser.Insert(user);
+            // user.Id = new Guid();
+            //  user.IsApproved = 1;
+            
+
+
+            return _mapper.Map(await _repositoryUser.InsertAsync(user), new UserDto());
 
         }
 
@@ -70,7 +87,7 @@ namespace AS.Business
         {
               
 
-             var user = GetById(userDto.Id);
+             var user = _repositoryUser.Get(p=>p.Id ==userDto.Id);
 
             user = _mapper.Map(userDto, user);
          
@@ -78,11 +95,10 @@ namespace AS.Business
         }
 
         public void Delete(Guid id)
-        {
-            var User = GetById(id);
-
-            _repositoryUser.Delete(User);
+        {      
+            _repositoryUser.Delete(id);
         }
+ 
 
     }
 

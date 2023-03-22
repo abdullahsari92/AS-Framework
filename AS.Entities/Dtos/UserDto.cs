@@ -1,8 +1,9 @@
-﻿namespace AS.Entities.Dtos
+﻿using AS.Entities.Base;
+
+namespace AS.Entities.Dtos
 {
-    public class UserDto
+    public class UserDto: Dto
     {
-        public Guid Id { get; set; }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }

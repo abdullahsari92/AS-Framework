@@ -1,16 +1,28 @@
 using AS.Business;
 using AS.Business.AutoMapperProfile;
+using AS.Business.DependencyResolvers;
 using AS.Business.Interfaces;
 using AS.Core;
+using AS.Core.Extensions;
+using AS.Core.Utilities.IoC;
+using AS.Core.ValueObjects;
 using AS.Data;
+using AS.Data.DependencyResolvers;
 using AS.Entities.Entity;
 //using AS.Data.Entity;
 using AutoMapper;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
-
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDependencyResolvers(new ICoreModule[]
+{
+   // new CoreModule(),
+    new DataAccessModule(),
+    new BusinessModule(),
+});
 
 builder.Services.AddTransient<IUserService, UserManager>();
 // Add services to the container.
@@ -23,31 +35,39 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddDependencyResolvers(new ICoreModule[]
-//{
-//    new BusinessModule(),
-//});
+builder.Services.AddHttpClient();
+
 
 #region AutoMapper
 var mappingConfig = new MapperConfiguration(mc =>
-{
-    mc.AddProfile(new BusinessProfile());
-});
-IMapper mapper = mappingConfig.CreateMapper();
+    {
+        mc.AddProfile(new BusinessProfile());
+    });
+    IMapper mapper = mappingConfig.CreateMapper();
 
-builder.Services.AddSingleton(mapper);
+    builder.Services.AddSingleton(mapper);
 #endregion AutoMapper
 
-builder.Services.AddTransient<IUserService, UserManager>();
-builder.Services.AddScoped<IRepository<User>, Repository<User>>();
-builder.Services.AddScoped<IRepository<RoleUserLine>, Repository<RoleUserLine>>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddRazorPages().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+builder.Services.AddControllers()
+.AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null); 
+
+
 
 
 //builder.Services.AddDbContext<EfContext>();
 var app = builder.Build();
 
+//app.UseHealthChecks("/Healthly", new HealthCheckOptions
+//{
+//    ResponseWriter = async (context, report) =>
+//    {
+//        context.Response.ContentType = "application/json";
+//        await context.Response.WriteAsync(JsonSerializer.Serialize(new SuccessResult("Ýþlem Baþarýlý")));
+//    }
+//});
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -55,6 +75,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseCors();
+
+
 
 
 app.UseHttpsRedirection();

@@ -8,10 +8,10 @@ namespace AS.Data
 {
     public class EfDbContext : DbContext, IDbContext
     {
-        //  public new DbSet<TEntity> Set<TEntity>() where TEntity : class => base.Set<TEntity>();
+          public new DbSet<TEntity> Set<TEntity>() where TEntity : class => base.Set<TEntity>();
 
 
-        public DbSet<User> Users { get; set; }
+       // public DbSet<User> Users { get; set; }
 
         // public DbSet<Menu> Menus { get; set; }
 

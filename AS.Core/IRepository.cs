@@ -14,7 +14,8 @@ namespace AS.Core
         /// Verileri getirir.
         /// </summary>
         /// <returns></returns>
-        IQueryable<TEntity> GetAll(bool asNoTracking=false);
+        Task<IQueryable<TEntity>> GetAll(bool asNoTracking=false);
+        
 
         /// <summary>
         /// verilerin tamamını where expression getirir.
@@ -108,7 +109,7 @@ namespace AS.Core
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="autoSaveIsNotActive"></param>
-        void Delete(TEntity entity, bool autoSaveIsNotActive = false);
+        void Delete(Guid Id, bool autoSaveIsNotActive = false);
 
 
     
