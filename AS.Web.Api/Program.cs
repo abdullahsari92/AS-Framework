@@ -17,6 +17,8 @@ using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddHealthChecks();
+
 builder.Services.AddDependencyResolvers(new ICoreModule[]
 {
    // new CoreModule(),
@@ -24,7 +26,6 @@ builder.Services.AddDependencyResolvers(new ICoreModule[]
     new BusinessModule(),
 });
 
-builder.Services.AddTransient<IUserService, UserManager>();
 // Add services to the container.
 string configuration = builder.Configuration.GetConnectionString("MsSqlConnection");
 builder.Services.AddDbContext<EfDbContext>(options => options.UseSqlServer(configuration));
@@ -50,9 +51,9 @@ var mappingConfig = new MapperConfiguration(mc =>
 
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddRazorPages().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
-builder.Services.AddControllers()
-.AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null); 
+//builder.Services.AddRazorPages().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+//builder.Services.AddControllers()
+//.AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null); 
 
 
 
@@ -60,26 +61,31 @@ builder.Services.AddControllers()
 //builder.Services.AddDbContext<EfContext>();
 var app = builder.Build();
 
-//app.UseHealthChecks("/Healthly", new HealthCheckOptions
-//{
-//    ResponseWriter = async (context, report) =>
-//    {
-//        context.Response.ContentType = "application/json";
-//        await context.Response.WriteAsync(JsonSerializer.Serialize(new SuccessResult("Ýþlem Baþarýlý")));
-//    }
-//});
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+app.UseHealthChecks("/Healthly", new HealthCheckOptions
+{
+    ResponseWriter = async (context, report) =>
+    {
+        context.Response.ContentType = "application/json";
+        await context.Response.WriteAsync(JsonSerializer.Serialize(new SuccessResult("Ýþlem Baþarýlý")));
+    }
+});
+
+builder.Services.AddEndpointsApiExplorer();
+
 app.UseCors();
 
+app.UseRouting();
 
-
-
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
