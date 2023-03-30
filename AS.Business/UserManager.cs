@@ -44,6 +44,21 @@ namespace AS.Business
             return listModel;
         }
 
+        public  ListModel<UserDto> GetAllTest()
+        {
+
+            //var FirstOrDefault =  _repositoryUser.GetAll().FirstOrDefault(p => p.LastName == "dag33");
+
+            //var LastOrDefault =  _repositoryUser.GetAll().SingleOrDefault(p => p.LastName == "daddd");
+
+
+            var listModel = new ListModel<UserDto>();
+            var users = _repositoryUser.GetAll(p => p.IsApproved==false, false);
+            listModel.Items = users.ProjectTo<UserDto>(_mapper.ConfigurationProvider).ToList();
+
+
+            return listModel;
+        }
         public async Task<UserDto> GetById(Guid id)
         {
             return null;
@@ -71,10 +86,7 @@ namespace AS.Business
 
             user = BaseEntityHelper.SetBaseEntitiy(user);
 
-            user.CreatedBy = new User() { Id=user.Id };
-            user.UpdatedBy = new User() { Id = user.Id };
-
-            // user.Id = new Guid();
+             user.Id = Guid.NewGuid();
             //  user.IsApproved = 1;
             
 

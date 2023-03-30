@@ -24,7 +24,7 @@ namespace AS.Entities.Base
         /// <summary>
         /// Oluşturan kullanıcı
         /// </summary>
-        public virtual User CreatedBy { get; set; }
+        public virtual User? CreatedBy { get; set; }
 
         /// <summary>
         /// Son değişiklik zamanı
@@ -34,7 +34,7 @@ namespace AS.Entities.Base
         /// <summary>
         /// Son değiştiren kullanıcı
         /// </summary>
-        public virtual User UpdatedBy { get; set; }
+        public virtual  User? UpdatedBy { get; set; }
 
         /// <summary>
         /// Onaylı kayıt mı?

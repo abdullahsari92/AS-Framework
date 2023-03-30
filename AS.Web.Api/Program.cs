@@ -14,6 +14,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,7 @@ builder.Services.AddDependencyResolvers(new ICoreModule[]
     new DataAccessModule(),
     new BusinessModule(),
 });
+builder.Services.AddHttpClient();
 
 // Add services to the container.
 string configuration = builder.Configuration.GetConnectionString("MsSqlConnection");
@@ -36,7 +38,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddHttpClient();
 
 
 #region AutoMapper
@@ -51,15 +52,20 @@ var mappingConfig = new MapperConfiguration(mc =>
 
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-//builder.Services.AddRazorPages().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
-//builder.Services.AddControllers()
-//.AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null); 
 
 
+//JsonSerializerOptions options = new()
+//{
+//    ReferenceHandler = ReferenceHandler.IgnoreCycles,
+//    WriteIndented = true
+//};
+
+builder.Services.AddControllers().AddJsonOptions(p => { p.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; });
 
 
-//builder.Services.AddDbContext<EfContext>();
 var app = builder.Build();
+
+
 
 
 // Configure the HTTP request pipeline.
@@ -68,6 +74,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 
 app.UseHealthChecks("/Healthly", new HealthCheckOptions

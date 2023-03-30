@@ -6,6 +6,25 @@ namespace AS.Core.Helpers
     public static class BaseEntityHelper
     {
 
+
+        public static User getUser()
+        {
+
+
+
+            return new User()
+            {
+                Id = new Guid("3FA85F64-5717-4562-B3FC-2C963F66AFA6"),
+                Email = "abdullahsari@gmail.com",
+                FirstName = "abdullah",
+                LastName = "dsarı",
+                Password="sfs",
+                Username= "sfsf"
+            };
+
+
+        }
+
         /// <summary>
         /// Entitleri ekleme işlemi yaparken ekleyen,güncelleyen kişi ve tarihlerini set ediyor.
         /// </summary>
@@ -18,8 +37,8 @@ namespace AS.Core.Helpers
             //var activeIdentity = CoreSettings.ActiveIdentity;
             //Item.CreatedById = activeIdentity.UserId;
 
-            Item.CreatedBy = new User() { Id = new Guid() };
-            Item.UpdatedBy = new User() { Id = new Guid() };
+            Item.CreatedBy = getUser();
+            Item.UpdatedBy = getUser();
 
             Item.CreationTime = DateTime.Now;
             Item.UpdateTime = DateTime.Now;
@@ -42,10 +61,8 @@ namespace AS.Core.Helpers
             Item.CreationTime = DateTime.Now;
             Item.UpdateTime = DateTime.Now;
 
-
-            Item.CreatedBy = new User() { Id = new Guid() };
-            Item.UpdatedBy = new User() { Id = new Guid() };
-
+            Item.CreatedBy = getUser();
+            Item.UpdatedBy = getUser();
 
             return Item;
         }

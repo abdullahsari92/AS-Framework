@@ -32,22 +32,25 @@ namespace AS.Web.Api.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] UserDto userDto)
+        public async Task<ActionResult<Core.IResult>> Add([FromBody] UserDto userDto)
         {
 
 
-            UserDto deger = new UserDto();     
+            UserDto model = new UserDto();     
             try
             {
-                deger = await _userManager.Insert(userDto);
+                model = await _userManager.Insert(userDto);
+
+             return   new SuccessDataResult<UserDto>(model);              
+
             }
             catch (Exception ex)
             {
-                 return Ok(deger);
+
+                return new ErrorResult(ex.Message);              
 
             }
-
-            return Ok(deger);
+       
         }
 
 
