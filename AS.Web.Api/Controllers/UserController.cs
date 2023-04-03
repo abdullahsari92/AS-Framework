@@ -22,7 +22,8 @@ namespace AS.Web.Api.Controllers
         public async Task<ActionResult<Core.IResult>> GetAll()
         {
 
-            
+            var userListbase = await _userManager.BaseGetAll();
+
             var userList = await _userManager.GetAll();
 
 
@@ -39,7 +40,7 @@ namespace AS.Web.Api.Controllers
             UserDto model = new UserDto();     
             try
             {
-                model = await _userManager.Insert(userDto);
+                model = await _userManager.BaseInsert(userDto);
 
              return   new SuccessDataResult<UserDto>(model);              
 

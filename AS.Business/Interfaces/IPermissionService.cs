@@ -4,13 +4,9 @@ using AS.Entities.Entity;
 
 namespace AS.Business.Interfaces
 {
-    public interface IPermissionService
+    public interface IPermissionService:IBaseService<Permission,PermissionDto>
     {
-        List<PermissionDto> GetAll();
-        PermissionDto GetById(Guid id);  
-        bool Insert(PermissionDto permissionDto);
-        void Update(PermissionDto permissionDto);
-        void Delete(Guid id);
+        
 
 
 

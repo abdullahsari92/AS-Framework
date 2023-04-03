@@ -10,59 +10,43 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AS.Business
 {
-    public class UserManager : IUserService
+    public class UserManager :BaseManager<User,UserDto>, IUserService
     {
-        private readonly IRepository<User> _repositoryUser;
+      //  public readonly IRepository<User> _repository;
 
-        private readonly IRepository<RoleUserLine> _repositoryRoleUser;
-        private readonly IMapper _mapper;
-
+      
+    
         //   private readonly IValidationManager<User> _userValidator;
         //private readonly IBirimService _birimService;
 
-        public UserManager(IRepository<User> repositoryUser, IRepository<RoleUserLine> repositoryRoleUser, IMapper mapper)
+        public UserManager(IRepository<User> repositoryUser, IMapper mapper):base(repositoryUser, mapper)
         {
-            _repositoryRoleUser = repositoryRoleUser;
-            _mapper = mapper;
-            _repositoryUser = repositoryUser;
-            // _userValidator = userValidator;
+       
+          //  _repository = repositoryUser;
+           
         }
 
         public async Task<ListModel<UserDto>> GetAll()
         {
-
-           //var FirstOrDefault =  _repositoryUser.GetAll().FirstOrDefault(p => p.LastName == "dag33");
-
-           //var LastOrDefault =  _repositoryUser.GetAll().SingleOrDefault(p => p.LastName == "daddd");
-
-
+         
             var listModel =  new ListModel<UserDto>();
-            var users = await _repositoryUser.GetAll();
+            var users = await _repository.GetAll();
+           
             listModel.Items = await users.ProjectTo<UserDto>(_mapper.ConfigurationProvider).ToListAsync();
 
-        
-            return listModel;
+
+                
+            return  listModel;
         }
-
-        public  ListModel<UserDto> GetAllTest()
-        {
-
-            //var FirstOrDefault =  _repositoryUser.GetAll().FirstOrDefault(p => p.LastName == "dag33");
-
-            //var LastOrDefault =  _repositoryUser.GetAll().SingleOrDefault(p => p.LastName == "daddd");
-
-
-            var listModel = new ListModel<UserDto>();
-            var users = _repositoryUser.GetAll(p => p.IsApproved==false, false);
-            listModel.Items = users.ProjectTo<UserDto>(_mapper.ConfigurationProvider).ToList();
-
-
-            return listModel;
-        }
+    
         public async Task<UserDto> GetById(Guid id)
         {
-            return null;
-           // return await _repositoryUser.GetAll().ProjectTo<UserDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync(x => x.Id == id) ?? new UserDto(); 
+
+            var user = await _repository.GetAsync(p => p.Id == id);
+
+            var userDto = _mapper.Map(user, new UserDto());
+
+            return userDto;
         }
 
         public List<RoleUserLine> GetRoleUser(Guid userId)
@@ -76,39 +60,32 @@ namespace AS.Business
 
         public async Task<UserDto> Insert(UserDto userDto)
         {
-            //   _userValidator.Validate(user);
-
-            if (_repositoryUser.IsExist(x => x.Username == userDto.Username))
+            if (_repository.IsExist(x => x.Username == userDto.Username))
                 throw new Exception("Bu user daha önce eklenmiþtir.");
 
 
-           var user = _mapper.Map(userDto, new User());
-
+          var user = _mapper.Map(userDto, new User());
+                 
             user = BaseEntityHelper.SetBaseEntitiy(user);
 
              user.Id = Guid.NewGuid();
-            //  user.IsApproved = 1;
+             user.IsApproved = true;
             
-
-
-            return _mapper.Map(await _repositoryUser.InsertAsync(user), new UserDto());
-
+            return _mapper.Map(await _repository.InsertAsync(user), new UserDto());
         }
 
         public void Update(UserDto userDto)
         {
               
+            var user = _repository.Get(p=>p.Id ==userDto.Id);
 
-             var user = _repositoryUser.Get(p=>p.Id ==userDto.Id);
-
-            user = _mapper.Map(userDto, user);
-         
-             _repositoryUser.Update(user);
+            user = _mapper.Map(userDto, user);         
+             _repository.Update(user);
         }
 
         public void Delete(Guid id)
         {      
-            _repositoryUser.Delete(id);
+            _repository.Delete(id);
         }
  
 

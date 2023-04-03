@@ -16,52 +16,34 @@ namespace AS.Core
         /// <returns></returns>
         Task<IQueryable<TEntity>> GetAll(bool asNoTracking=false);
         
-
-        /// <summary>
-        /// verilerin tamamını where expression getirir.
-        /// </summary>
-        /// <param name="filter"></param>
-        /// <param name="asNoTracking"></param>
-        /// <returns></returns>
-        IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter, bool asNoTracking = false);
-
-        //IIncludableJoin<TEntity, TProperty> Join<TProperty>(Expression<Func<TEntity, TProperty>> navigationProperty);
-
-        /// <summary>
-        /// Async olarak verileri getirir.
-        /// </summary>
-        /// <returns></returns>
-        Task<IQueryable<TEntity>> GetAsync();
-
-        /// <summary>
+         /// <summary>
         /// Sql cümlesi ile veri getirir.
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        IQueryable<TEntity> Get(string sql);
+        IQueryable<TEntity> GetSql(string sql);
 
         /// <summary>
         /// Async olarak sql cümlesi ile veri getirir.
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        Task<IQueryable<TEntity>> GetAsync(string sql);
+        Task<IQueryable<TEntity>> GetSqlAsync(string sql);
 
         /// <summary>
         /// Tek bir veriyi koşula göre getirir.
         /// </summary>
-        /// <param name="predicate"></param>
+        /// <param name="filter"></param>
         /// <returns></returns>
-        TEntity Get(Expression<Func<TEntity, bool>> predicate);
+        TEntity Get(Expression<Func<TEntity, bool>> filter, bool asNoTracking = false);
 
-        TEntity GetNoTracking(Expression<Func<TEntity, bool>> predicate);
 
         /// <summary>
         /// Async olarak tek bir veriyi koşula göre getirir.
         /// </summary>
-        /// <param name="predicate"></param>
+        /// <param name="filter"></param>
         /// <returns></returns>
-        Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> filter, bool asNoTracking = false);
 
         /// <summary>
         /// Yeni kayıt ekler. Eklenen kaydı geri döndürür.

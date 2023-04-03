@@ -20,10 +20,10 @@ internal class MenuConfiguration : IEntityTypeConfiguration<Menu>
         builder.HasIndex(x => x.DisplayOrder).IsUnique(false).HasName("IX_MenuDisplayOrder");
         builder.Property(x => x.IsApproved).IsRequired();
         builder.Property(x => x.CreationTime).IsRequired();
-        builder.HasOne(x => x.CreatedBy).WithMany(y => y.MenusCreatedBy).IsRequired().OnDelete(DeleteBehavior.Restrict);
-        builder.Property(x => x.UpdateTime).IsRequired();
-        builder.HasOne(x => x.UpdatedBy).WithMany(y => y.MenusUpdatedBy).IsRequired().OnDelete(DeleteBehavior.Restrict);
 
+        builder.HasOne(p => p.CreatedBy).WithMany(t => t.MenusCreatedBy).HasForeignKey(x => x.CreatedById).OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(x => x.UpdatedBy).WithMany(y => y.MenusUpdatedBy).IsRequired().HasForeignKey(x => x.UpdatedById).OnDelete(DeleteBehavior.Restrict);
 
         builder.Property(x => x.Name).IsRequired().HasColumnType("varchar(512)");
         builder.Property(x => x.MenuUrl).IsRequired().HasColumnType("varchar(512)");

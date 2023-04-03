@@ -20,4 +20,8 @@
     <ProjectReference Include="..\AS.Entities\AS.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helper\" />
+  </ItemGroup>
+
 </Project>

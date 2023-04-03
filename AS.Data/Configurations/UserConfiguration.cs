@@ -21,8 +21,11 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.CreationTime).IsRequired();
         builder.Property(x => x.UpdateTime).IsRequired();
 
-        builder.HasOne(x => x.CreatedBy).WithMany(y => y.UsersCreatedBy).IsRequired().OnDelete(DeleteBehavior.Restrict);
-        builder.HasOne(x => x.UpdatedBy).WithMany(y => y.UsersUpdatedBy).IsRequired().OnDelete(DeleteBehavior.Restrict);
+    
+
+        builder.HasOne(p => p.CreatedBy).WithMany(t => t.UsersCreatedBy).HasForeignKey(x => x.CreatedById).OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(x => x.UpdatedBy).WithMany(y => y.UsersUpdatedBy).IsRequired().HasForeignKey(x => x.UpdatedById).OnDelete(DeleteBehavior.Restrict);
 
         builder.Property(x => x.Username).IsRequired().HasColumnType("varchar(512)");
         builder.HasIndex(x => x.Username).IsUnique().HasName("UK_UserUsername");

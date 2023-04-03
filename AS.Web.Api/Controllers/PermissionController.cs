@@ -23,7 +23,7 @@ namespace AS.Web.Api.Controllers
         {
 
             
-            var permissionList = _permissionService.GetAll();
+            var permissionList = _permissionService.BaseGetAll();
 
 
             return Ok(permissionList);
@@ -36,7 +36,7 @@ namespace AS.Web.Api.Controllers
                 
             try
             {
-                 _permissionService.Insert(permissionDto);
+                 _permissionService.BaseInsert(permissionDto);
             }
             catch (Exception ex)
             {
@@ -55,7 +55,7 @@ namespace AS.Web.Api.Controllers
       
             try
             {
-                _permissionService.Update(permissionDto);
+                _permissionService.BaseUpdate(permissionDto);
             }
             catch (Exception ex)
             {
@@ -76,7 +76,7 @@ namespace AS.Web.Api.Controllers
 
             try
             {
-                _permissionService.Delete(Id);
+                _permissionService.BaseDelete(Id);
             }
             catch (Exception ex)
             {

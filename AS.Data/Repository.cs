@@ -43,29 +43,26 @@ namespace AS.Data
         //}
 
 
-        public IQueryable<TEntity> Get(string sql)
+        public IQueryable<TEntity> GetSql(string sql)
         {
             return _dbSet.FromSqlRaw(sql);
         }
 
-        public async Task<IQueryable<TEntity>> GetAsync(string sql)
+        public async Task<IQueryable<TEntity>> GetSqlAsync(string sql)
         {
-            return await Task.FromResult(Get(sql));
+            return await Task.FromResult(GetSql(sql));
         }
 
-        public TEntity Get(Expression<Func<TEntity, bool>> predicate)
+        public TEntity Get(Expression<Func<TEntity, bool>> filter, bool asNoTracking = false)
         {
-            return _dbSet.FirstOrDefault(predicate);
+            return asNoTracking ? _dbSet.AsNoTracking().FirstOrDefault(filter) : _dbSet.FirstOrDefault(filter);
         }
 
-        public TEntity GetNoTracking(Expression<Func<TEntity, bool>> predicate)
+         public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> filter, bool asNoTracking = false)
         {
-            return _dbSet.AsNoTracking().FirstOrDefault(predicate);
-        }
-
-        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            return await _dbSet.FirstOrDefaultAsync(predicate);
+              return asNoTracking ?
+                await _dbSet.AsNoTracking().FirstOrDefaultAsync(filter) 
+                :await _dbSet.FirstOrDefaultAsync(filter);
         }
 
         /// <summary>
@@ -80,38 +77,9 @@ namespace AS.Data
                 ? _dbSet.AsNoTracking()
                 : _dbSet;
         }
-
-        /// <summary>
-        /// AsNoTracking kullanırsak yaptığımız select üzerinde herhangi bir update işlemi uygulayamıyoruz. 
-        /// Yani değişikliği yaptıktan sonra entity.SaveChanges() diyerek update işlemi yapamayacağız.
-        /// </summary>
-        /// <param name="asNoTracking"></param>
-        /// <returns></returns>
-        public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter, bool asNoTracking = false)
-        {
-            return asNoTracking
-                ? _dbSet.AsNoTracking().Where(filter)
-                : _dbSet.Where(filter);
-        }
-
+        
+  
     
-
-
-
-        public void DeleteRange(IEnumerable<TEntity> entities, bool autoSaveIsNotActive = false)
-        {
-
-            foreach (var entity in entities)
-            {
-                var deleteItem = _context.Entry(entity);
-                deleteItem.State = EntityState.Deleted;
-            }
-            if (!autoSaveIsNotActive)
-            {
-                _context.SaveChanges();
-            }
-        }
-
         //public IIncludableJoin<TEntity, TProperty> Join<TProperty>(Expression<Func<TEntity, TProperty>> navigationProperty)
         //{
         //    var query = _dbSet.Join(navigationProperty);
@@ -121,11 +89,6 @@ namespace AS.Data
         public bool IsExist(Expression<Func<TEntity, bool>> filter)
         {
             return _context.Set<TEntity>().AsNoTracking().Any(filter);
-        }
-
-        public async Task<IQueryable<TEntity>> GetAsync()
-        {
-            return await Task.FromResult(await GetAll());
         }
 
         public TEntity Insert(TEntity entity, bool autoSaveIsNotActive = false)
@@ -206,6 +169,20 @@ namespace AS.Data
                 await SaveChangesAsync();
             }
         }
+        public void DeleteRange(IEnumerable<TEntity> entities, bool autoSaveIsNotActive = false)
+        {
+
+            foreach (var entity in entities)
+            {
+                var deleteItem = _context.Entry(entity);
+                deleteItem.State = EntityState.Deleted;
+            }
+            if (!autoSaveIsNotActive)
+            {
+                _context.SaveChanges();
+            }
+        }
+
 
         public int SaveChanges()
         {

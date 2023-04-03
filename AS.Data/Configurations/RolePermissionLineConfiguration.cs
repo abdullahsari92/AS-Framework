@@ -19,7 +19,7 @@ namespace AS.Data.Configurations
            // builder.Property(x => x.Id).IsRequired();
             builder.Property(x => x.CreationTime).IsRequired();
             builder.HasOne(x => x.CreatedBy).WithMany(y => y.RolePermissionLinesCreatedBy).IsRequired().OnDelete(DeleteBehavior.Restrict);
-            builder.Property(x => x.UpdatedTime).IsRequired();
+            builder.Property(x => x.UpdateTime).IsRequired();
             builder.HasOne(x => x.UpdatedBy).WithMany(y => y.RolePermissionLinesUpdatedBy).IsRequired().OnDelete(DeleteBehavior.Restrict);
 
 

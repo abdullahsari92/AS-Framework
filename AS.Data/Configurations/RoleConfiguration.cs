@@ -20,7 +20,7 @@ internal class RoleConfiguration : IEntityTypeConfiguration<Role>
 
         builder.Property(x => x.IsApproved).IsRequired();
         builder.Property(x => x.CreationTime).IsRequired();
-        builder.HasOne(x => x.CreatedBy).WithMany(y => y.RolesCreatedBy).IsRequired().OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(x => x.CreatedBy).WithMany(y => y.RolesCreatedBy).OnDelete(DeleteBehavior.Restrict);
         builder.Property(x => x.UpdateTime).IsRequired();
         builder.HasOne(x => x.UpdatedBy).WithMany(y => y.RolesUpdatedBy).IsRequired().OnDelete(DeleteBehavior.Restrict);
 

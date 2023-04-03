@@ -1,26 +1,22 @@
-﻿using AS.Entities.Base;
-using AS.Entities.Entity;
-
-namespace AS.Core.Helpers
+﻿namespace AS.Core.Helpers
 {
     public static class BaseEntityHelper
     {
 
-
-        public static User getUser()
+        public static Guid getUser()
         {
 
+            return new Guid("3FA85F64-5717-4562-B3FC-2C963F66AFA6");
 
-
-            return new User()
-            {
-                Id = new Guid("3FA85F64-5717-4562-B3FC-2C963F66AFA6"),
-                Email = "abdullahsari@gmail.com",
-                FirstName = "abdullah",
-                LastName = "dsarı",
-                Password="sfs",
-                Username= "sfsf"
-            };
+            //return new User()
+            //{
+            //    Id = new Guid("3FA85F64-5717-4562-B3FC-2C963F66AFA6"),
+            //    Email = "abdullahsari@gmail.com",
+            //    FirstName = "abdullah",
+            //    LastName = "dsarı",
+            //    Password="sfs",
+            //    Username= "sfsf"
+            //};
 
 
         }
@@ -31,14 +27,14 @@ namespace AS.Core.Helpers
         /// <typeparam name="T">Beklenilen entity tipi</typeparam>
         /// <param name="Item"></param>
         /// <returns></returns>
-        public static T SetBaseEntitiyNoExten<T>(T Item) where T : BaseEntity, new()
+        public static T SetBaseEntitiyNoExten<T>(T Item) where T : IEntity, new()
         {
             //TODO:Bakılacak
             //var activeIdentity = CoreSettings.ActiveIdentity;
             //Item.CreatedById = activeIdentity.UserId;
 
-            Item.CreatedBy = getUser();
-            Item.UpdatedBy = getUser();
+            Item.CreatedById = getUser();
+            Item.UpdatedById = getUser();
 
             Item.CreationTime = DateTime.Now;
             Item.UpdateTime = DateTime.Now;
@@ -53,7 +49,7 @@ namespace AS.Core.Helpers
         /// <typeparam name="T">Beklenilen entity tipi</typeparam>
         /// <param name="Item"></param>
         /// <returns></returns>
-        public static T SetBaseEntitiy<T>(this T Item) where T : BaseEntity, new()
+        public static T SetBaseEntitiy<T>(this T Item) where T : IEntity, new()
         {
             //TODO:Bakılacak
             //var activeIdentity = CoreSettings.ActiveIdentity;
@@ -61,8 +57,8 @@ namespace AS.Core.Helpers
             Item.CreationTime = DateTime.Now;
             Item.UpdateTime = DateTime.Now;
 
-            Item.CreatedBy = getUser();
-            Item.UpdatedBy = getUser();
+            Item.CreatedById = getUser();
+            Item.UpdatedById = getUser();
 
             return Item;
         }

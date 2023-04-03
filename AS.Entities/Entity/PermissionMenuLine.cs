@@ -2,7 +2,7 @@
 
 namespace AS.Entities.Entity
 {
-    public class PermissionMenuLine : LineBaseEntity
+    public class PermissionMenuLine : BaseEntity
     {
         public virtual Permission Permission { get; set; }
         public virtual Menu Menu { get; set; }
