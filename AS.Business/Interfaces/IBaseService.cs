@@ -38,7 +38,7 @@ namespace AS.Business.Interfaces
         /// </summary>
         /// <param name="model"></param>
         /// <returns>Güncelleme iþlemi sonucu oluþan model</returns>
-        void BaseUpdate(TMapTo model);
+        Task<TMapTo> BaseUpdate(TMapTo model);
 
         /// <summary>
         /// ID parametresi alarak silme iþlemini yapar.

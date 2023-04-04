@@ -63,6 +63,15 @@
             return Item;
         }
 
+        public static T SetBaseUpdateEntitiy<T>(this T Item) where T : IEntity, new()
+        {
+                   
+            Item.UpdateTime = DateTime.Now;      
+            Item.UpdatedById = getUser();
+
+            return Item;
+        }
+
 
     }
 }

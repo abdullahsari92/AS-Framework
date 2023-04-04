@@ -63,14 +63,24 @@ namespace AS.Business
             return _mapper.Map(await _repository.InsertAsync(tEntity), new TMapTo());
         }
 
-        public void BaseUpdate(TMapTo model)
+        public async Task<TMapTo> BaseUpdate(TMapTo model)
         {
-            throw new NotImplementedException();
+
+            var tEntity = _repository.Get(p => p.Id == model.Id);
+
+            tEntity = _mapper.Map(model, tEntity);
+
+
+            tEntity = BaseEntityHelper.SetBaseUpdateEntitiy(tEntity);               
+
+
+            return _mapper.Map(await _repository.UpdateAsync(tEntity), new TMapTo());
         }
 
         public void BaseDelete(Guid id)
         {
-            throw new NotImplementedException();
+            _repository.Delete(id);
+
         }
     }
 

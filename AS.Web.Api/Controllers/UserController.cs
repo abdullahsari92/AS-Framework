@@ -63,7 +63,7 @@ namespace AS.Web.Api.Controllers
             User deger = new User();
             try
             {
-                 _userManager.Update(userDto);
+                 _userManager.BaseUpdate(userDto);
             }
             catch (Exception ex)
             {
