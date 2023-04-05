@@ -17,7 +17,11 @@ namespace AS.Data.DependencyResolvers
 
             services.AddScoped<IRepository<RoleUserLine>, Repository<RoleUserLine>>();
 
-      
+            services.AddScoped<IRepository<Role>, Repository<Role>>();
+
+
+
+
         }
     }
 }

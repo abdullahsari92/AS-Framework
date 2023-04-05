@@ -11,7 +11,9 @@ namespace AS.Business.DependencyResolvers
             //Transient her defasında yeni bir instance(örnek) oluşturuyor.
             services.AddTransient<IUserService, UserManager>();
             services.AddTransient<IPermissionService, PermissionManager>();
-                  
+            services.AddTransient<IRoleService, RoleManager>();
+
+
 
         }
     }
