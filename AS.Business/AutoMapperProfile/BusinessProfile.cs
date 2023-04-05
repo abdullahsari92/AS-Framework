@@ -12,6 +12,12 @@ namespace AS.Business.AutoMapperProfile
 
     
             CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<UserDto, User>()
+                .ForMember(x => x.CreatedById, opt => opt.Ignore())
+                .ForMember(x => x.CreationTime, opt => opt.Ignore())
+                .ForMember(x => x.CreatedBy, opt => opt.Ignore())
+
+                 .ReverseMap();
             CreateMap<Permission, PermissionDto>().ReverseMap();
 
         }

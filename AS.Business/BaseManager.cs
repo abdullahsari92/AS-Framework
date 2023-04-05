@@ -68,6 +68,11 @@ namespace AS.Business
 
             var tEntity = _repository.Get(p => p.Id == model.Id);
 
+            if(tEntity == null)
+            {
+
+                return null;
+            }
             tEntity = _mapper.Map(model, tEntity);
 
 

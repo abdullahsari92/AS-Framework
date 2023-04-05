@@ -47,8 +47,7 @@ namespace AS.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-
-                return new ErrorResult(ex.Message);              
+                        return new ErrorResult(ex.Message);              
 
             }
        
@@ -57,25 +56,21 @@ namespace AS.Web.Api.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Update([FromBody] UserDto userDto)
+        public async Task<ActionResult<Core.IResult>> Update([FromBody] UserDto userDto)
         {
-      
-            User deger = new User();
-            try
+
+               try
             {
-                 _userManager.BaseUpdate(userDto);
+               var model = await _userManager.BaseUpdate(userDto);
+
+                return new SuccessDataResult<UserDto>(model);
             }
             catch (Exception ex)
-            {
-
-                return Ok(deger);
-
+            {  
+                return new ErrorResult(ex.Message);
             }
 
-
-            // var userList = _userManager.Insert(user);
-
-            return Ok(deger);
+         
         }
 
 

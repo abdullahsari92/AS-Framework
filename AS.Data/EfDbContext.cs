@@ -23,16 +23,18 @@ namespace AS.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            var entityTypeConfigurations = Assembly.GetExecutingAssembly().GetTypes().Where(type => !string.IsNullOrEmpty(type.Namespace) && type.GetInterfaces().Select(x => x.Name).FirstOrDefault() == typeof(IEntityTypeConfiguration<>).Name);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(EfDbContext).Assembly);
 
-            foreach (var entityTypeConfiguration in entityTypeConfigurations)
-            {
+            //var entityTypeConfigurations = Assembly.GetExecutingAssembly().GetTypes().Where(type => !string.IsNullOrEmpty(type.Namespace) && type.GetInterfaces().Select(x => x.Name).FirstOrDefault() == typeof(IEntityTypeConfiguration<>).Name);
 
-                dynamic configurationInstance = Activator.CreateInstance(entityTypeConfiguration);
+            //foreach (var entityTypeConfiguration in entityTypeConfigurations)
+            //{
 
-                modelBuilder.ApplyConfiguration(configurationInstance);
+            //    dynamic configurationInstance = Activator.CreateInstance(entityTypeConfiguration);
 
-            }
+            //    modelBuilder.ApplyConfiguration(configurationInstance);
+
+            //}
 
             base.OnModelCreating(modelBuilder);
         }
