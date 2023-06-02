@@ -19,7 +19,7 @@ namespace AS.Web.Api.Controllers
 
         
        // [HttpGet(Name = "GetAll")]
-        public IActionResult GetAll()
+        public IActionResult GetList()
         {
 
             

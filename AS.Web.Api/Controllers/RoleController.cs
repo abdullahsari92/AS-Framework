@@ -19,7 +19,7 @@ namespace AS.Web.Api.Controllers
 
         
        // [HttpGet(Name = "GetAll")]
-        public async Task<ActionResult<Core.IResult>> GetAll()
+        public async Task<ActionResult<Core.IResult>> GetList()
         {
 
             var roleList = await _roleManager.BaseGetAll();
