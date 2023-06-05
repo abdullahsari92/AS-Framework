@@ -10,16 +10,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AS.Business
 {
-    public class RoleManager : BaseManager<Role,RoleDto>,IRoleService
+    public class MenuManager : BaseManager<Menu,MenuDto>,IMenuService
     {
      
-        public RoleManager(IRepository<Role> repositoryRole,IMapper mapper):base(repositoryRole,mapper)
+        public MenuManager(IRepository<Menu> repositoryMenu,IMapper mapper):base(repositoryMenu,mapper)
         {
           
         }
               
 
     }
-}
 
 }

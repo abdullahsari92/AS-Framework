@@ -27,6 +27,9 @@ namespace AS.Entities.Entity
 
         public virtual ICollection<Role> RolesUpdatedBy { get; set; }
 
+        public virtual ICollection<Language> LanguageCreatedBy { get; set; }
+        public virtual ICollection<Language> LanguageUpdatedBy { get; set; }
+
         public virtual ICollection<Permission> PermissionsCreatedBy { get; set; }
         public virtual ICollection<Permission> PermissionsUpdatedBy{ get; set; }
 
