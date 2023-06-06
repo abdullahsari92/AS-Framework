@@ -25,7 +25,6 @@ internal class LanguageConfiguration : IEntityTypeConfiguration<Language>
         builder.HasOne(p => p.CreatedBy).WithMany(t => t.LanguageCreatedBy).HasForeignKey(x => x.CreatedById).OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(x => x.UpdatedBy).WithMany(y => y.LanguageUpdatedBy).IsRequired().HasForeignKey(x => x.UpdatedById).OnDelete(DeleteBehavior.Restrict);
-        
-    
+            
     }
 }
