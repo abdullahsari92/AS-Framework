@@ -20,6 +20,11 @@ namespace AS.Business.AutoMapperProfile
                  .ReverseMap();
             CreateMap<Permission, PermissionDto>().ReverseMap();
 
+            CreateMap<Language, LanguageDto>().ReverseMap();
+
+            CreateMap<Menu, MenuDto>().ReverseMap();
+
+
         }
     }
 }

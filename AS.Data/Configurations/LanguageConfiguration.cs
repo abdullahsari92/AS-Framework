@@ -20,6 +20,17 @@ internal class LanguageConfiguration : IEntityTypeConfiguration<Language>
         builder.Property(x => x.Keyword).IsRequired();
         builder.Property(x => x.Tr).IsRequired();
 
+        builder.Property(x => x.En).IsRequired();
+
+        builder.Property(x => x.Es).IsRequired(false);
+        builder.Property(x => x.Fr).IsRequired(false);
+
+        builder.Property(x => x.De).IsRequired(false);
+      
+
+
+
+
         builder.Property(x => x.CreationTime).IsRequired();
 
         builder.HasOne(p => p.CreatedBy).WithMany(t => t.LanguageCreatedBy).HasForeignKey(x => x.CreatedById).OnDelete(DeleteBehavior.Restrict);

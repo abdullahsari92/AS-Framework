@@ -12,6 +12,9 @@ namespace AS.Business.DependencyResolvers
             services.AddTransient<IUserService, UserManager>();
             services.AddTransient<IPermissionService, PermissionManager>();
             services.AddTransient<IRoleService, RoleManager>();
+            services.AddTransient<ILanguageService, LanguageManager>();
+            services.AddTransient<IMenuService, MenuManager>();
+
 
 
 

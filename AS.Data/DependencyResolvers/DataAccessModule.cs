@@ -19,6 +19,10 @@ namespace AS.Data.DependencyResolvers
 
             services.AddScoped<IRepository<Role>, Repository<Role>>();
 
+            services.AddScoped<IRepository<Language>, Repository<Language>>();
+            services.AddScoped<IRepository<Menu>, Repository<Menu>>();
+
+
 
 
 
