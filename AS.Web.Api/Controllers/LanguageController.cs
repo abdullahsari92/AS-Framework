@@ -22,22 +22,22 @@ namespace AS.Web.Api.Controllers
         public async Task<ActionResult<Core.IResult>> GetList()
         {
 
-            var LanguageList = await _LanguageManager.BaseGetAll();
+            var LanguageList = await _LanguageManager.GetLLanguageDefination();
                   
-          return  new SuccessDataResult<ListModel<LanguageDto>>(LanguageList);
+          return  new SuccessDataResult<ListModel<LanguageDto >>(LanguageList);
            
         }
 
 
         [HttpPost]
-        public async Task<ActionResult<Core.IResult>> Add([FromBody] LanguageDto LanguageDto)
+        public async Task<ActionResult<Core.IResult>> Add([FromBody] LanguageDto  languageDto)
         {
 
 
-            LanguageDto model = new LanguageDto();     
+            LanguageDto  model = new LanguageDto();     
             try
             {
-                model = await _LanguageManager.BaseInsert(LanguageDto);
+                model = await _LanguageManager.BaseInsert(languageDto);
 
              return   new SuccessDataResult<LanguageDto>(model);              
 
@@ -50,16 +50,37 @@ namespace AS.Web.Api.Controllers
        
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Core.IResult>> AddAll([FromBody] List<LanguageDto > LanguageList)
+        {
+
+
+            LanguageDto  model = new LanguageDto ();
+            try
+            {
+                var success = _LanguageManager.InsertAll(LanguageList);
+
+                return new SuccessDataResult<bool>(true);
+
+            }
+            catch (Exception ex)
+            {
+                return new ErrorResult(ex.Message);
+
+            }
+
+        }
+
 
         [HttpPost]
-        public async Task<ActionResult<Core.IResult>> Update([FromBody] LanguageDto LanguageDto)
+        public async Task<ActionResult<Core.IResult>> Update([FromBody] LanguageDto  LanguageDto)
         {
 
                try
             {
                var model = await _LanguageManager.BaseUpdate(LanguageDto);
 
-                return new SuccessDataResult<LanguageDto>(model);
+                return new SuccessDataResult<LanguageDto >(model);
             }
             catch (Exception ex)
             {  
