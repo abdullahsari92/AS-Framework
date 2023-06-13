@@ -10,14 +10,11 @@ namespace AS.Business
 {
     public class PermissionManager :BaseManager<Permission, PermissionDto>, IPermissionService
     {
-        private readonly IRepository<Permission> _permissionRepository;
-
 
         private readonly IRepository<RoleUserLine> _repositoryRoleUser;
-
     
 
-        public PermissionManager( IRepository<RoleUserLine> repositoryRoleUser, IMapper mapper, IRepository<Permission> repositoryPermission):base(repositoryPermission,mapper)
+        public PermissionManager(  IMapper mapper, IRepository<Permission> repositoryPermission):base(repositoryPermission,mapper)
         {
          
         }

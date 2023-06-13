@@ -19,7 +19,7 @@ namespace AS.Web.Api.Controllers
 
         
        // [HttpGet(Name = "GetAll")]
-        public async Task<ActionResult<Core.IResult>> GetList()
+        public async Task<ActionResult<Core.IResult>> List()
         {
 
             var userListbase = await _userManager.BaseGetAll();
@@ -27,7 +27,7 @@ namespace AS.Web.Api.Controllers
             var userList = await _userManager.GetAll();
 
 
-          return  new SuccessDataResult<ListModel<UserDto>>(userList);
+          return  new SuccessDataResult<ListModel<UserDto>>(userListbase);
            
         }
 

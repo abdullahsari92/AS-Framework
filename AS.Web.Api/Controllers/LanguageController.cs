@@ -19,7 +19,7 @@ namespace AS.Web.Api.Controllers
 
         
        // [HttpGet(Name = "GetAll")]
-        public async Task<ActionResult<Core.IResult>> GetList()
+        public async Task<ActionResult<Core.IResult>> List()
         {
 
             var LanguageList = await _LanguageManager.GetLLanguageDefination();

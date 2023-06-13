@@ -12,21 +12,21 @@ namespace AS.Web.Api.Controllers
     {
 
         private IPermissionService _permissionService;
-        public PermissionController(IPermissionService permissionManager)
+        public PermissionController(IPermissionService permissionService)
         {
-            _permissionService = permissionManager;
+            _permissionService = permissionService;
         }
 
         
        // [HttpGet(Name = "GetAll")]
-        public IActionResult GetList()
+        public async Task<ActionResult<Core.IResult>> List()
         {
 
             
-            var permissionList = _permissionService.BaseGetAll();
+            var permissionList = await _permissionService.BaseGetAll() ?? new ListModel<PermissionDto>();
 
-
-            return Ok(permissionList);
+            return new SuccessDataResult<ListModel<PermissionDto>>(permissionList);
+          
         }
 
 
