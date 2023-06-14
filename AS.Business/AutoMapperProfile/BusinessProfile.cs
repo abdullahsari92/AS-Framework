@@ -32,6 +32,13 @@ namespace AS.Business.AutoMapperProfile
              .ForMember(x => x.CreatedBy, opt => opt.Ignore())
               .ReverseMap();
 
+            CreateMap<RoleDto, Role>()
+         .ForMember(x => x.CreatedById, opt => opt.Ignore())
+         .ForMember(x => x.CreationTime, opt => opt.Ignore())
+         .ForMember(x => x.CreatedBy, opt => opt.Ignore())
+          .ReverseMap();
+
+
             CreateMap<Permission, PermissionDto>().ReverseMap();
 
            // CreateMap<Language, LanguageDto >().ReverseMap();
