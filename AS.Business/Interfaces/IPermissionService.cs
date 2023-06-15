@@ -6,9 +6,9 @@ namespace AS.Business.Interfaces
 {
     public interface IPermissionService:IBaseService<Permission,PermissionDto>
     {
-        
 
 
+        Task<PermissionDto> Insert(PermissionDto permissionDto);
 
     }
 }

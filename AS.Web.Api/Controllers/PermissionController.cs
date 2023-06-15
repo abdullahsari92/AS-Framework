@@ -70,13 +70,14 @@ namespace AS.Web.Api.Controllers
         }
 
 
-        [HttpPost]
-        public IActionResult Delete([FromBody] Guid Id)
+         [HttpDelete("{id}")]
+        public IActionResult Delete([FromBody] Guid id)
         {
 
+           // var id = new Guid(Id);
             try
             {
-                _permissionService.BaseDelete(Id);
+                _permissionService.BaseDelete(id);
             }
             catch (Exception ex)
             {

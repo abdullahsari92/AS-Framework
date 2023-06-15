@@ -20,6 +20,20 @@ namespace AS.Business
         }
 
 
+        public async Task<PermissionDto> Insert(PermissionDto permissionDto)
+        {
+
+
+           var isEntity =  _repository.IsExist(p => p.ControllerName == permissionDto.ControllerName && p.ActionName == permissionDto.ActionName);
+            if(!isEntity)
+            {
+                return await this.BaseInsert(permissionDto);
+                
+            }
+
+               return null;
+        }
+
 
     }
 

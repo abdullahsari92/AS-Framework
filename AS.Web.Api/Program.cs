@@ -11,6 +11,7 @@ using AS.Data.DependencyResolvers;
 using AS.Entities.Entity;
 //using AS.Data.Entity;
 using AutoMapper;
+using IDS.WebApi.Infrastructure;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
@@ -87,6 +88,9 @@ app.UseHealthChecks("/Healthly", new HealthCheckOptions
 });
 
 builder.Services.AddEndpointsApiExplorer();
+
+app.UseMiddleware<SecurityMiddleware>();
+
 
 app.UseCors();
 
