@@ -14,9 +14,16 @@ namespace AS.Core
         /// Verileri getirir.
         /// </summary>
         /// <returns></returns>
-        Task<IQueryable<TEntity>> GetAll(bool asNoTracking=false);
-        
-         /// <summary>
+        Task<IQueryable<TEntity>> GetAll( bool asNoTracking=false);
+
+
+        /// <summary>
+        /// Verileri getirir.
+        /// </summary>
+        /// <returns></returns>
+        Task<IQueryable<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter, bool asNoTracking = false);
+
+        /// <summary>
         /// Sql cümlesi ile veri getirir.
         /// </summary>
         /// <param name="sql"></param>

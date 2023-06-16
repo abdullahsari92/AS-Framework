@@ -29,6 +29,28 @@ namespace AS.Web.Api.Controllers
         }
 
 
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Core.IResult>> GetById( Guid Id)
+        {
+
+
+            ListModel<PermissionDto> model = new ListModel<PermissionDto>();    
+            try
+            {
+              model = await _roleManager.Get(Id);
+
+                return new SuccessDataResult<ListModel<PermissionDto>>(model);
+
+            }
+            catch (Exception ex)
+            {
+                return new ErrorResult(ex.Message);
+
+            }
+
+        }
+
         [HttpPost]
         public async Task<ActionResult<Core.IResult>> Add([FromBody] RoleDto roleDto)
         {

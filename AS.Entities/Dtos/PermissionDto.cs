@@ -9,6 +9,7 @@ namespace AS.Entities.Dtos
         public string Description { get; set; }
         public string ControllerName { get; set; }
         public string ActionName { get; set; }
+        public string Checked { get; set; }
 
 
     }

@@ -71,15 +71,28 @@ namespace AS.Data
         /// </summary>
         /// <param name="asNoTracking"></param>
         /// <returns></returns>
-        public async Task<IQueryable<TEntity>> GetAll(bool asNoTracking = false)
+        public async Task<IQueryable<TEntity>> GetAll( bool asNoTracking = false)
         {
             return asNoTracking
                 ? _dbSet.AsNoTracking()
                 : _dbSet;
         }
-        
-  
-    
+
+        /// <summary>
+        /// AsNoTracking kullanırsak yaptığımız select üzerinde herhangi bir update işlemi uygulayamıyoruz. 
+        /// Yani değişikliği yaptıktan sonra entity.SaveChanges() diyerek update işlemi yapamayacağız.
+        /// </summary>
+        /// <param name="asNoTracking"></param>
+        /// <returns></returns>
+        public async Task<IQueryable<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter, bool asNoTracking = false)
+        {
+            return asNoTracking
+                ? _dbSet.Where(filter).AsNoTracking()
+                : _dbSet.Where(filter);
+        }
+
+
+
         //public IIncludableJoin<TEntity, TProperty> Join<TProperty>(Expression<Func<TEntity, TProperty>> navigationProperty)
         //{
         //    var query = _dbSet.Join(navigationProperty);

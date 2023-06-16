@@ -36,7 +36,7 @@ namespace AS.Web.Api.Controllers
                 
             try
             {
-                 _permissionService.BaseInsert(permissionDto);
+               var permis =   _permissionService.Insert(permissionDto);
             }
             catch (Exception ex)
             {
@@ -71,7 +71,7 @@ namespace AS.Web.Api.Controllers
 
 
          [HttpDelete("{id}")]
-        public IActionResult Delete([FromBody] Guid id)
+        public IActionResult Delete(Guid id)
         {
 
            // var id = new Guid(Id);
@@ -86,7 +86,8 @@ namespace AS.Web.Api.Controllers
 
             }
 
-            return Ok(true);
+            return Ok(new SuccessResult("İşlem Başaralı"));
+
         }
     }
 }
