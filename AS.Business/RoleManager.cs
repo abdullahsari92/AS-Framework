@@ -22,19 +22,45 @@ namespace AS.Business
             _permissionRepository = permissionRepository;
         }
 
-        public async Task<ListModel<PermissionDto>> Get(Guid roleId)
+        public async Task<ListModel<PermissionModel>> Get(Guid roleId)
         {
 
-         // var rolePermissionList =  _rolePermissionRepository.GetAll().Include(p => p.Role).Where(p=>p.Role.Id == roleId);
+          //var rolePermissionList =  _rolePermissionRepository.GetAll().ContinueWith(p => p.).Where(p=>p.Role.Id == roleId);
 
 
-            var listModel = new ListModel<PermissionDto>();
+            var listModel = new List<IGrouping<string, Permission>> ();
 
             var query = await _permissionRepository.GetAll();
 
-            var dto = query.GroupBy(p => p.ControllerName).ToList();
+            var permissionModelList = new ListModel<PermissionModel>();
 
-            return listModel;
+            foreach (var item in query.ToList())
+            {
+                var permissionModel = new PermissionModel();
+                permissionModel.Key = item.ControllerName;
+
+                foreach (var subItem in query.Where(p=>p.ControllerName ==item.ControllerName))
+                {
+                    var aa = _mapper.Map(subItem, new PermissionDto());
+                    permissionModel.Value.Add(aa);
+                }
+
+                permissionModelList.Items.Add(permissionModel);
+                
+            }
+                      
+
+
+          //var aa =  query.GroupBy(p => p.ControllerName).Select(p => new PermissionModel
+          //  {
+          //      Key = p.Key,
+          //      Value = p as List<PermissionDto>
+          //  }
+          //    ).ToList();
+
+          //  listModel = await query.ProjectTo<PermissionDto>().GroupBy(p => p.ControllerName).ToList();
+
+            return permissionModelList;
         }
     }
 }

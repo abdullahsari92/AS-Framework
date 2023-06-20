@@ -7,7 +7,9 @@ namespace AS.Business.Interfaces
 {
     public interface IRoleService: IBaseService<Role,RoleDto>
     {
-        Task<ListModel<PermissionDto>> Get(Guid roleId);
+        // Task<ListModel<PermissionDto>> Get(Guid roleId);
+
+        Task<ListModel<PermissionModel>> Get(Guid roleId);
 
     }
 }

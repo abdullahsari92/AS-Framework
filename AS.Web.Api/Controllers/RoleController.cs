@@ -38,7 +38,7 @@ namespace AS.Web.Api.Controllers
             ListModel<PermissionDto> model = new ListModel<PermissionDto>();    
             try
             {
-              model = await _roleManager.Get(Id);
+            var  model2 = await _roleManager.Get(Id);
 
                 return new SuccessDataResult<ListModel<PermissionDto>>(model);
 
