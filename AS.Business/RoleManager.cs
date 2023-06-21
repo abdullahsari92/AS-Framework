@@ -32,19 +32,23 @@ namespace AS.Business
 
             var query = await _permissionRepository.GetAll();
 
-            var permissionModelList = new ListModel<PermissionModel>();
+            var permissionModelList = new ListModel<PermissionModel>() { Items = new List<PermissionModel> {       
+            } };
 
-            foreach (var item in query.ToList())
+
+            var deger = query.Select(p => p.ControllerName).Distinct().ToList();
+            foreach (var item in query.Select(p=>p.ControllerName).Distinct().ToList())
             {
                 var permissionModel = new PermissionModel();
-                permissionModel.Key = item.ControllerName;
+                permissionModel.Key = item.ToString();
 
-                foreach (var subItem in query.Where(p=>p.ControllerName ==item.ControllerName))
+                foreach (var subItem in query.Where(p=>p.ControllerName ==item.ToString()))
                 {
                     var aa = _mapper.Map(subItem, new PermissionDto());
                     permissionModel.Value.Add(aa);
                 }
 
+              //  if(permissionModelList.Any(p=>p.))
                 permissionModelList.Items.Add(permissionModel);
                 
             }
