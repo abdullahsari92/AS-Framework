@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Validation\FluentValidation\" />
+    <Compile Remove="Validation\FluentValidation\**" />
+    <EmbeddedResource Remove="Validation\FluentValidation\**" />
+    <None Remove="Validation\FluentValidation\**" />
   </ItemGroup>
 
   <ItemGroup>
