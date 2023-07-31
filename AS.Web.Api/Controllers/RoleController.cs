@@ -35,12 +35,12 @@ namespace AS.Web.Api.Controllers
         {
 
 
-            ListModel<PermissionDto> model = new ListModel<PermissionDto>();    
+            ListModel<PermissionModel> model = new ListModel<PermissionModel>();    
             try
             {
-              model = await _roleManager.Get(Id);
+             model = await _roleManager.Get(Id);
 
-                return new SuccessDataResult<ListModel<PermissionDto>>(model);
+                return new SuccessDataResult<ListModel<PermissionModel>>(model);
 
             }
             catch (Exception ex)
