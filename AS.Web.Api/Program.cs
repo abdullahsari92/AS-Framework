@@ -89,7 +89,7 @@ app.UseHealthChecks("/Healthly", new HealthCheckOptions
 
 builder.Services.AddEndpointsApiExplorer();
 
-app.UseMiddleware<SecurityMiddleware>();
+//app.UseMiddleware<SecurityMiddleware>();
 
 
 app.UseCors();
