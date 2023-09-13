@@ -1,195 +1,28 @@
 USE [AsFramework]
 GO
-/****** Object:  Schema [AS]    Script Date: 13.09.2023 15:08:07 ******/
-CREATE SCHEMA [AS]
+INSERT [AS].[Users] ([Id], [FirstName], [LastName], [Username], [Password], [Email], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'3fa85f64-5717-4562-b3fc-2c963f66afa6', N'abdullah', N'dsarı', N'sfsf', N'sfs                                                                                                                             ', N'abdullahsari@gmail.com', CAST(N'2023-03-31T11:06:33.4220627' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-03-31T11:06:33.4221795' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 0)
 GO
-/****** Object:  Table [AS].[Language]    Script Date: 13.09.2023 15:08:07 ******/
-SET ANSI_NULLS ON
+INSERT [AS].[Users] ([Id], [FirstName], [LastName], [Username], [Password], [Email], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'2880d032-ee50-40aa-8dd8-5a91560722a6', N'Nuri', N'katman', N'mustafaKatman', N'xvdgd4                                                                                                                          ', N'katman@gmail.com', CAST(N'2023-04-03T18:49:59.9846667' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-04-05T15:16:32.5955517' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 0)
 GO
-SET QUOTED_IDENTIFIER ON
+INSERT [AS].[Users] ([Id], [FirstName], [LastName], [Username], [Password], [Email], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'c96b9f39-7e16-4666-aa9e-69fd8f54ff62', N'sarı', N'sarı', N'Ali', N'xvdgd4                                                                                                                          ', N'sar@gmail.com', CAST(N'2023-04-03T18:44:20.7646898' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-04-03T18:44:20.7647360' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
 GO
-CREATE TABLE [AS].[Language](
-	[Id] [uniqueidentifier] NOT NULL,
-	[Keyword] [nvarchar](max) NOT NULL,
-	[Tr] [nvarchar](max) NOT NULL,
-	[En] [nvarchar](max) NOT NULL,
-	[Fr] [nvarchar](max) NULL,
-	[Es] [nvarchar](max) NULL,
-	[De] [nvarchar](max) NULL,
-	[CreationTime] [datetime2](7) NOT NULL,
-	[CreatedById] [uniqueidentifier] NOT NULL,
-	[UpdateTime] [datetime2](7) NOT NULL,
-	[UpdatedById] [uniqueidentifier] NOT NULL,
-	[IsApproved] [bit] NOT NULL,
- CONSTRAINT [PK_Language] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'a6dbbab6-20a9-4b4a-9f88-3792f102713b', N'PERMİSSİON_LİST', N'', N'Permission', N'list', CAST(N'2023-06-19T21:57:41.2916520' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-06-19T21:57:41.2916554' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
 GO
-/****** Object:  Table [AS].[Menus]    Script Date: 13.09.2023 15:08:07 ******/
-SET ANSI_NULLS ON
+INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'ac3b5808-416c-45de-a524-38fb648e9a0c', N'ROLE_GETBYID', N'', N'Role', N'getById', CAST(N'2023-06-19T21:57:52.1462684' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-06-19T21:57:52.1462723' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
 GO
-SET QUOTED_IDENTIFIER ON
+INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'71743490-1df5-4f74-bfd3-5b41fc83e4f7', N'LANGUAGE_ADD', N'', N'Language', N'add', CAST(N'2023-06-19T21:59:46.4898492' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-06-19T21:59:46.4898521' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
 GO
-CREATE TABLE [AS].[Menus](
-	[Id] [uniqueidentifier] NOT NULL,
-	[Name] [varchar](512) NOT NULL,
-	[MenuUrl] [varchar](512) NOT NULL,
-	[Icon] [varchar](512) NOT NULL,
-	[Description] [varchar](512) NOT NULL,
-	[DisplayOrder] [int] NOT NULL,
-	[ParentMenuId] [uniqueidentifier] NOT NULL,
-	[CreationTime] [datetime2](7) NOT NULL,
-	[CreatedById] [uniqueidentifier] NOT NULL,
-	[UpdateTime] [datetime2](7) NOT NULL,
-	[UpdatedById] [uniqueidentifier] NOT NULL,
-	[IsApproved] [bit] NOT NULL,
- CONSTRAINT [PK_Menus] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'0208df2c-f022-46fa-867b-bc13930f415e', N'USER_LİST', N'', N'User', N'list', CAST(N'2023-06-19T21:44:14.8490440' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-06-19T21:44:14.8490464' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
 GO
-/****** Object:  Table [AS].[PermissionMenuLines]    Script Date: 13.09.2023 15:08:07 ******/
-SET ANSI_NULLS ON
+INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'5a6113a0-1549-479e-927d-bf4b1e21a264', N'ROLE_LİST', N'', N'Role', N'list', CAST(N'2023-06-19T21:57:49.8880547' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-06-19T21:57:49.8880583' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
 GO
-SET QUOTED_IDENTIFIER ON
+INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'326021ca-5db0-46fd-8315-cfd212dcac28', N'PERMİSSİON_ADD', N'', N'Permission', N'Add', CAST(N'2023-07-31T21:23:01.2119097' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-07-31T21:23:01.2121593' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
 GO
-CREATE TABLE [AS].[PermissionMenuLines](
-	[Id] [uniqueidentifier] NOT NULL,
-	[PermissionId] [uniqueidentifier] NOT NULL,
-	[MenuId] [uniqueidentifier] NOT NULL,
-	[CreationTime] [datetime2](7) NOT NULL,
-	[CreatedById] [uniqueidentifier] NOT NULL,
-	[UpdateTime] [datetime2](7) NOT NULL,
-	[UpdatedById] [uniqueidentifier] NOT NULL,
-	[IsApproved] [bit] NOT NULL,
- CONSTRAINT [PK_PermissionMenuLines] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'9076b851-12c9-4940-8434-e7f59c401b53', N'LANGUAGE_ADDALL', N'', N'Language', N'AddAll', CAST(N'2023-08-23T12:03:21.1804518' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-08-23T12:03:21.1805019' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
 GO
-/****** Object:  Table [AS].[Permissions]    Script Date: 13.09.2023 15:08:07 ******/
-SET ANSI_NULLS ON
+INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'a3ea0948-13ee-4758-8438-ec007040d59b', N'LANGUAGE_LİST', N'', N'Language', N'list', CAST(N'2023-06-19T21:44:14.9017090' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-06-19T21:44:14.9017114' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
 GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [AS].[Permissions](
-	[Id] [uniqueidentifier] NOT NULL,
-	[Name] [varchar](512) NOT NULL,
-	[Description] [varchar](512) NOT NULL,
-	[ControllerName] [varchar](512) NOT NULL,
-	[ActionName] [varchar](512) NOT NULL,
-	[CreationTime] [datetime2](7) NOT NULL,
-	[CreatedById] [uniqueidentifier] NOT NULL,
-	[UpdateTime] [datetime2](7) NOT NULL,
-	[UpdatedById] [uniqueidentifier] NOT NULL,
-	[IsApproved] [bit] NOT NULL,
- CONSTRAINT [PK_Permissions] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [AS].[RolePermissionLines]    Script Date: 13.09.2023 15:08:07 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [AS].[RolePermissionLines](
-	[Id] [uniqueidentifier] NOT NULL,
-	[RoleId] [uniqueidentifier] NOT NULL,
-	[PermissionId] [uniqueidentifier] NOT NULL,
-	[CreationTime] [datetime2](7) NOT NULL,
-	[CreatedById] [uniqueidentifier] NOT NULL,
-	[UpdateTime] [datetime2](7) NOT NULL,
-	[UpdatedById] [uniqueidentifier] NOT NULL,
-	[IsApproved] [bit] NOT NULL,
- CONSTRAINT [PK_RolePermissionLines] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [AS].[Roles]    Script Date: 13.09.2023 15:08:07 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [AS].[Roles](
-	[Id] [uniqueidentifier] NOT NULL,
-	[Name] [varchar](512) NOT NULL,
-	[Description] [varchar](512) NOT NULL,
-	[Level] [int] NOT NULL,
-	[CreationTime] [datetime2](7) NOT NULL,
-	[CreatedById] [uniqueidentifier] NOT NULL,
-	[UpdateTime] [datetime2](7) NOT NULL,
-	[UpdatedById] [uniqueidentifier] NOT NULL,
-	[IsApproved] [bit] NOT NULL,
- CONSTRAINT [PK_Roles] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [AS].[RoleUserLines]    Script Date: 13.09.2023 15:08:07 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [AS].[RoleUserLines](
-	[Id] [uniqueidentifier] NOT NULL,
-	[RoleId] [uniqueidentifier] NOT NULL,
-	[UserId] [uniqueidentifier] NOT NULL,
-	[CreationTime] [datetime2](7) NOT NULL,
-	[CreatedById] [uniqueidentifier] NOT NULL,
-	[UpdateTime] [datetime2](7) NOT NULL,
-	[UpdatedById] [uniqueidentifier] NOT NULL,
-	[IsApproved] [bit] NOT NULL,
- CONSTRAINT [PK_RoleUserLines] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [AS].[Users]    Script Date: 13.09.2023 15:08:07 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [AS].[Users](
-	[Id] [uniqueidentifier] NOT NULL,
-	[FirstName] [nvarchar](max) NOT NULL,
-	[LastName] [nvarchar](max) NOT NULL,
-	[Username] [varchar](512) NOT NULL,
-	[Password] [char](128) NOT NULL,
-	[Email] [varchar](512) NOT NULL,
-	[CreationTime] [datetime2](7) NOT NULL,
-	[CreatedById] [uniqueidentifier] NOT NULL,
-	[UpdateTime] [datetime2](7) NOT NULL,
-	[UpdatedById] [uniqueidentifier] NOT NULL,
-	[IsApproved] [bit] NOT NULL,
- CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 13.09.2023 15:08:07 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[__EFMigrationsHistory](
-	[MigrationId] [nvarchar](150) NOT NULL,
-	[ProductVersion] [nvarchar](32) NOT NULL,
- CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY CLUSTERED 
-(
-	[MigrationId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+INSERT [AS].[Roles] ([Id], [Name], [Description], [Level], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'46524f7a-a2dd-4d1c-9214-2721578e3687', N'Yönetici', N'genel yetkili', 1, CAST(N'2023-06-14T18:08:38.7566313' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-06-14T18:08:38.7567391' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
 GO
 INSERT [AS].[Language] ([Id], [Keyword], [Tr], [En], [Fr], [Es], [De], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'8e9a9fde-d6e9-4c59-a611-005a0ff7827f', N'TEXT.Archived', N'Arşivle', N'Archived', NULL, NULL, NULL, CAST(N'2023-08-23T13:19:25.4060622' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-08-23T13:19:25.4060629' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
 GO
@@ -1367,154 +1200,9 @@ INSERT [AS].[Language] ([Id], [Keyword], [Tr], [En], [Fr], [Es], [De], [Creation
 GO
 INSERT [AS].[Language] ([Id], [Keyword], [Tr], [En], [Fr], [Es], [De], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'63d577d1-2bc3-4d42-914e-ffc86de4b8a8', N'TEXT.Add_Event', N'Etkinlik Ekle', N'Add Event', NULL, NULL, NULL, CAST(N'2023-08-23T13:19:25.3932986' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-08-23T13:19:25.3932992' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
 GO
-INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'a6dbbab6-20a9-4b4a-9f88-3792f102713b', N'PERMİSSİON_LİST', N'', N'Permission', N'list', CAST(N'2023-06-19T21:57:41.2916520' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-06-19T21:57:41.2916554' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
-GO
-INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'ac3b5808-416c-45de-a524-38fb648e9a0c', N'ROLE_GETBYID', N'', N'Role', N'getById', CAST(N'2023-06-19T21:57:52.1462684' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-06-19T21:57:52.1462723' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
-GO
-INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'71743490-1df5-4f74-bfd3-5b41fc83e4f7', N'LANGUAGE_ADD', N'', N'Language', N'add', CAST(N'2023-06-19T21:59:46.4898492' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-06-19T21:59:46.4898521' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
-GO
-INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'0208df2c-f022-46fa-867b-bc13930f415e', N'USER_LİST', N'', N'User', N'list', CAST(N'2023-06-19T21:44:14.8490440' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-06-19T21:44:14.8490464' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
-GO
-INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'5a6113a0-1549-479e-927d-bf4b1e21a264', N'ROLE_LİST', N'', N'Role', N'list', CAST(N'2023-06-19T21:57:49.8880547' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-06-19T21:57:49.8880583' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
-GO
-INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'326021ca-5db0-46fd-8315-cfd212dcac28', N'PERMİSSİON_ADD', N'', N'Permission', N'Add', CAST(N'2023-07-31T21:23:01.2119097' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-07-31T21:23:01.2121593' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
-GO
-INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'9076b851-12c9-4940-8434-e7f59c401b53', N'LANGUAGE_ADDALL', N'', N'Language', N'AddAll', CAST(N'2023-08-23T12:03:21.1804518' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-08-23T12:03:21.1805019' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
-GO
-INSERT [AS].[Permissions] ([Id], [Name], [Description], [ControllerName], [ActionName], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'a3ea0948-13ee-4758-8438-ec007040d59b', N'LANGUAGE_LİST', N'', N'Language', N'list', CAST(N'2023-06-19T21:44:14.9017090' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-06-19T21:44:14.9017114' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
-GO
-INSERT [AS].[Roles] ([Id], [Name], [Description], [Level], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'46524f7a-a2dd-4d1c-9214-2721578e3687', N'Yönetici', N'genel yetkili', 1, CAST(N'2023-06-14T18:08:38.7566313' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-06-14T18:08:38.7567391' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
-GO
-INSERT [AS].[Users] ([Id], [FirstName], [LastName], [Username], [Password], [Email], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'3fa85f64-5717-4562-b3fc-2c963f66afa6', N'abdullah', N'dsarı', N'sfsf', N'sfs                                                                                                                             ', N'abdullahsari@gmail.com', CAST(N'2023-03-31T11:06:33.4220627' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-03-31T11:06:33.4221795' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 0)
-GO
-INSERT [AS].[Users] ([Id], [FirstName], [LastName], [Username], [Password], [Email], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'2880d032-ee50-40aa-8dd8-5a91560722a6', N'Nuri', N'katman', N'mustafaKatman', N'xvdgd4                                                                                                                          ', N'katman@gmail.com', CAST(N'2023-04-03T18:49:59.9846667' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-04-05T15:16:32.5955517' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 0)
-GO
-INSERT [AS].[Users] ([Id], [FirstName], [LastName], [Username], [Password], [Email], [CreationTime], [CreatedById], [UpdateTime], [UpdatedById], [IsApproved]) VALUES (N'c96b9f39-7e16-4666-aa9e-69fd8f54ff62', N'sarı', N'sarı', N'Ali', N'xvdgd4                                                                                                                          ', N'sar@gmail.com', CAST(N'2023-04-03T18:44:20.7646898' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', CAST(N'2023-04-03T18:44:20.7647360' AS DateTime2), N'3fa85f64-5717-4562-b3fc-2c963f66afa6', 1)
-GO
 INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20230228125415_YeniDb', N'7.0.1')
 GO
 INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20230606081345_Vb-2', N'7.0.1')
 GO
 INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20230608064213_vb-3', N'7.0.1')
-GO
-ALTER TABLE [AS].[PermissionMenuLines] ADD  DEFAULT (CONVERT([bit],(0))) FOR [IsApproved]
-GO
-ALTER TABLE [AS].[RolePermissionLines] ADD  DEFAULT (CONVERT([bit],(0))) FOR [IsApproved]
-GO
-ALTER TABLE [AS].[RoleUserLines] ADD  DEFAULT (CONVERT([bit],(0))) FOR [IsApproved]
-GO
-ALTER TABLE [AS].[Language]  WITH CHECK ADD  CONSTRAINT [FK_Language_Users_CreatedById] FOREIGN KEY([CreatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[Language] CHECK CONSTRAINT [FK_Language_Users_CreatedById]
-GO
-ALTER TABLE [AS].[Language]  WITH CHECK ADD  CONSTRAINT [FK_Language_Users_UpdatedById] FOREIGN KEY([UpdatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[Language] CHECK CONSTRAINT [FK_Language_Users_UpdatedById]
-GO
-ALTER TABLE [AS].[Menus]  WITH CHECK ADD  CONSTRAINT [FK_Menus_Menus_ParentMenuId] FOREIGN KEY([ParentMenuId])
-REFERENCES [AS].[Menus] ([Id])
-GO
-ALTER TABLE [AS].[Menus] CHECK CONSTRAINT [FK_Menus_Menus_ParentMenuId]
-GO
-ALTER TABLE [AS].[Menus]  WITH CHECK ADD  CONSTRAINT [FK_Menus_Users_CreatedById] FOREIGN KEY([CreatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[Menus] CHECK CONSTRAINT [FK_Menus_Users_CreatedById]
-GO
-ALTER TABLE [AS].[Menus]  WITH CHECK ADD  CONSTRAINT [FK_Menus_Users_UpdatedById] FOREIGN KEY([UpdatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[Menus] CHECK CONSTRAINT [FK_Menus_Users_UpdatedById]
-GO
-ALTER TABLE [AS].[PermissionMenuLines]  WITH CHECK ADD  CONSTRAINT [FK_PermissionMenuLines_Menus_MenuId] FOREIGN KEY([MenuId])
-REFERENCES [AS].[Menus] ([Id])
-GO
-ALTER TABLE [AS].[PermissionMenuLines] CHECK CONSTRAINT [FK_PermissionMenuLines_Menus_MenuId]
-GO
-ALTER TABLE [AS].[PermissionMenuLines]  WITH CHECK ADD  CONSTRAINT [FK_PermissionMenuLines_Permissions_PermissionId] FOREIGN KEY([PermissionId])
-REFERENCES [AS].[Permissions] ([Id])
-GO
-ALTER TABLE [AS].[PermissionMenuLines] CHECK CONSTRAINT [FK_PermissionMenuLines_Permissions_PermissionId]
-GO
-ALTER TABLE [AS].[PermissionMenuLines]  WITH CHECK ADD  CONSTRAINT [FK_PermissionMenuLines_Users_CreatedById] FOREIGN KEY([CreatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[PermissionMenuLines] CHECK CONSTRAINT [FK_PermissionMenuLines_Users_CreatedById]
-GO
-ALTER TABLE [AS].[PermissionMenuLines]  WITH CHECK ADD  CONSTRAINT [FK_PermissionMenuLines_Users_UpdatedById] FOREIGN KEY([UpdatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[PermissionMenuLines] CHECK CONSTRAINT [FK_PermissionMenuLines_Users_UpdatedById]
-GO
-ALTER TABLE [AS].[Permissions]  WITH CHECK ADD  CONSTRAINT [FK_Permissions_Users_CreatedById] FOREIGN KEY([CreatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[Permissions] CHECK CONSTRAINT [FK_Permissions_Users_CreatedById]
-GO
-ALTER TABLE [AS].[Permissions]  WITH CHECK ADD  CONSTRAINT [FK_Permissions_Users_UpdatedById] FOREIGN KEY([UpdatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[Permissions] CHECK CONSTRAINT [FK_Permissions_Users_UpdatedById]
-GO
-ALTER TABLE [AS].[RolePermissionLines]  WITH CHECK ADD  CONSTRAINT [FK_RolePermissionLines_Permissions_PermissionId] FOREIGN KEY([PermissionId])
-REFERENCES [AS].[Permissions] ([Id])
-GO
-ALTER TABLE [AS].[RolePermissionLines] CHECK CONSTRAINT [FK_RolePermissionLines_Permissions_PermissionId]
-GO
-ALTER TABLE [AS].[RolePermissionLines]  WITH CHECK ADD  CONSTRAINT [FK_RolePermissionLines_Roles_RoleId] FOREIGN KEY([RoleId])
-REFERENCES [AS].[Roles] ([Id])
-GO
-ALTER TABLE [AS].[RolePermissionLines] CHECK CONSTRAINT [FK_RolePermissionLines_Roles_RoleId]
-GO
-ALTER TABLE [AS].[RolePermissionLines]  WITH CHECK ADD  CONSTRAINT [FK_RolePermissionLines_Users_CreatedById] FOREIGN KEY([CreatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[RolePermissionLines] CHECK CONSTRAINT [FK_RolePermissionLines_Users_CreatedById]
-GO
-ALTER TABLE [AS].[RolePermissionLines]  WITH CHECK ADD  CONSTRAINT [FK_RolePermissionLines_Users_UpdatedById] FOREIGN KEY([UpdatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[RolePermissionLines] CHECK CONSTRAINT [FK_RolePermissionLines_Users_UpdatedById]
-GO
-ALTER TABLE [AS].[Roles]  WITH CHECK ADD  CONSTRAINT [FK_Roles_Users_CreatedById] FOREIGN KEY([CreatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[Roles] CHECK CONSTRAINT [FK_Roles_Users_CreatedById]
-GO
-ALTER TABLE [AS].[Roles]  WITH CHECK ADD  CONSTRAINT [FK_Roles_Users_UpdatedById] FOREIGN KEY([UpdatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[Roles] CHECK CONSTRAINT [FK_Roles_Users_UpdatedById]
-GO
-ALTER TABLE [AS].[RoleUserLines]  WITH CHECK ADD  CONSTRAINT [FK_RoleUserLines_Roles_RoleId] FOREIGN KEY([RoleId])
-REFERENCES [AS].[Roles] ([Id])
-GO
-ALTER TABLE [AS].[RoleUserLines] CHECK CONSTRAINT [FK_RoleUserLines_Roles_RoleId]
-GO
-ALTER TABLE [AS].[RoleUserLines]  WITH CHECK ADD  CONSTRAINT [FK_RoleUserLines_Users_CreatedById] FOREIGN KEY([CreatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[RoleUserLines] CHECK CONSTRAINT [FK_RoleUserLines_Users_CreatedById]
-GO
-ALTER TABLE [AS].[RoleUserLines]  WITH CHECK ADD  CONSTRAINT [FK_RoleUserLines_Users_UpdatedById] FOREIGN KEY([UpdatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[RoleUserLines] CHECK CONSTRAINT [FK_RoleUserLines_Users_UpdatedById]
-GO
-ALTER TABLE [AS].[RoleUserLines]  WITH CHECK ADD  CONSTRAINT [FK_RoleUserLines_Users_UserId] FOREIGN KEY([UserId])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[RoleUserLines] CHECK CONSTRAINT [FK_RoleUserLines_Users_UserId]
-GO
-ALTER TABLE [AS].[Users]  WITH CHECK ADD  CONSTRAINT [FK_Users_Users_CreatedById] FOREIGN KEY([CreatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[Users] CHECK CONSTRAINT [FK_Users_Users_CreatedById]
-GO
-ALTER TABLE [AS].[Users]  WITH CHECK ADD  CONSTRAINT [FK_Users_Users_UpdatedById] FOREIGN KEY([UpdatedById])
-REFERENCES [AS].[Users] ([Id])
-GO
-ALTER TABLE [AS].[Users] CHECK CONSTRAINT [FK_Users_Users_UpdatedById]
 GO
