@@ -18,13 +18,13 @@ namespace AS.Web.Api.Controllers
         }
 
         
-       // [HttpGet(Name = "GetAll")]
+        [HttpGet]
         public async Task<ActionResult<Core.IResult>> List()
         {
 
             var LanguageList = await _LanguageManager.GetLLanguageDefination();
                   
-          return  new SuccessDataResult<ListModel<LanguageDto >>(LanguageList);
+          return  new SuccessDataResult<ListModel<LanguageDto>>(LanguageList);
            
         }
 
@@ -44,7 +44,7 @@ namespace AS.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                return new ErrorResult(ex.Message);              
+                return new ErrorResult(ex.Message);             
 
             }
        

@@ -19,7 +19,7 @@ namespace AS.Web.Api.Controllers
         }
 
         
-       // [HttpGet(Name = "GetAll")]
+        [HttpGet]
         public async Task<ActionResult<Core.IResult>> List()
         {
 

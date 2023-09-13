@@ -31,7 +31,7 @@ builder.Services.AddHttpClient();
 
 // Add services to the container.
 string configuration = builder.Configuration.GetConnectionString("MsSqlConnection");
-builder.Services.AddDbContext<EfDbContext>(options => options.UseSqlServer(configuration));
+builder.Services.AddDbContext<EfDbContext>(options => options.UseSqlServer(configuration), ServiceLifetime.Transient);
 builder.Services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
 
 builder.Services.AddControllers();
