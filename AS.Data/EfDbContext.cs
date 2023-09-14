@@ -11,9 +11,14 @@ namespace AS.Data
           public new DbSet<TEntity> Set<TEntity>() where TEntity : class => base.Set<TEntity>();
 
 
-       // public DbSet<User> Users { get; set; }
+        // public DbSet<User> Users { get; set; }
 
         // public DbSet<Menu> Menus { get; set; }
+
+        public EfDbContext() : base()
+        {
+
+        }
 
         public EfDbContext(DbContextOptions options) : base(options)
         {

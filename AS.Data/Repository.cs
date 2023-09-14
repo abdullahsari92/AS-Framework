@@ -10,12 +10,16 @@ namespace AS.Data
         private bool _disposed;
 
         private readonly EfDbContext _context;
-        private readonly DbSet<TEntity> _dbSet;
+       private readonly DbSet<TEntity> _dbSet;
 
-        public Repository(EfDbContext context)
+        public Repository()
         {
-            _context = context;
-            _dbSet = _context.Set<TEntity>();
+          //  _context = context;
+
+           using var context = new EfDbContext();
+            _dbSet = context.Set<TEntity>();
+            _context    = context;
+           // _dbSet = _context.Set<TEntity>();
         }
 
         public void Dispose()
@@ -86,6 +90,10 @@ namespace AS.Data
         /// <returns></returns>
         public async Task<IQueryable<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter, bool asNoTracking = false)
         {
+            using var context = new EfDbContext();
+             var  _dbSet = context.Set<TEntity>();
+
+
             return asNoTracking
                 ? _dbSet.Where(filter).AsNoTracking()
                 : _dbSet.Where(filter);
