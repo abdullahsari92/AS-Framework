@@ -80,27 +80,52 @@ namespace AS.Business
         {
             var query = await _permissionRepository.GetAll();
 
-            foreach (var item in roleAddModel.PermissionModel.Where(p=>p.Checked))
+
+            var sonuc =await  RolePermissionDelete(roleAddModel.RoleDto.Id);
+
+            if (sonuc)
             {
-                var CRUDActionTypeList = item.ControllerCrudList.Where(s => s.Checked).Select(m => m.CRUDActionType);
 
-                var controllerPermissionList = await query.Where(p => p.ControllerName == item.ControllerName && CRUDActionTypeList.Contains(p.CRUDActionType)).ToListAsync();
-
-                foreach (var controllerPermission in controllerPermissionList)
+                foreach (var item in roleAddModel.PermissionModel.Where(p=>p.Checked))
                 {
-                    var rolePermissionLine = new RolePermissionLine()
+                    var CRUDActionTypeList = item.ControllerCrudList.Where(s => s.Checked).Select(m => m.CRUDActionType);
+
+                    var controllerPermissionList = await query.Where(p => p.ControllerName == item.ControllerName && CRUDActionTypeList.Contains(p.CRUDActionType)).ToListAsync();
+
+                    foreach (var controllerPermission in controllerPermissionList)
                     {
-                        PermissionId = controllerPermission.Id,
-                        RoleId = roleAddModel.RoleDto.Id
-                    };
+                        var rolePermissionLine = new RolePermissionLine()
+                        {
+                            PermissionId = controllerPermission.Id,
+                            RoleId = roleAddModel.RoleDto.Id
+                        };
 
-                    rolePermissionLine = BaseEntityHelper.SetBaseEntitiy(rolePermissionLine);
+                        rolePermissionLine = BaseEntityHelper.SetBaseEntitiy(rolePermissionLine);
 
-                    _rolePermissionRepository.Insert(rolePermissionLine);
+                        _rolePermissionRepository.Insert(rolePermissionLine);
+                    }
                 }
-            }         
+            }
 
             return roleAddModel.PermissionModel;
+        }
+
+        public async Task<bool> RolePermissionDelete(Guid roleId)
+        {
+
+           var query = await _rolePermissionRepository.GetAll();
+            foreach (var item in query.Where(p=>p.RoleId == roleId).ToList())
+            {
+
+                _rolePermissionRepository.DeleteAsync(item,true);
+
+            }
+           bool  sonuc = await _rolePermissionRepository.SaveChangesAsync() != 0;
+
+
+
+
+            return sonuc;
         }
 
         public async Task<List<PermissionModel>> RolePermissionUpdate(RoleUpdateModel roleAddModel)
