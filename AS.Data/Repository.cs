@@ -12,16 +12,21 @@ namespace AS.Data
         private readonly EfDbContext _context;
        private readonly DbSet<TEntity> _dbSet;
 
-        public Repository()
+        //public Repository()
+        //{
+        //  //  _context = context;
+
+        //   // using var context = new EfDbContext();
+        // //   _dbSet = context.Set<TEntity>();
+        //  //  _context    = context;
+        //    _dbSet = _context.Set<TEntity>();
+        //}
+
+        public Repository(EfDbContext context)
         {
-          //  _context = context;
-
-           using var context = new EfDbContext();
-            _dbSet = context.Set<TEntity>();
-            _context    = context;
-           // _dbSet = _context.Set<TEntity>();
+            _context = context;
+            _dbSet = _context.Set<TEntity>();
         }
-
         public void Dispose()
         {
             Dispose(true);
@@ -41,10 +46,10 @@ namespace AS.Data
         }
 
 
-        //public DbSet<TEntity> GetEntities()
-        //{
-        //    return _dbSet;
-        //}
+        public DbSet<TEntity> GetEntities()
+        {
+            return _dbSet;
+        }
 
 
         public IQueryable<TEntity> GetSql(string sql)
@@ -77,9 +82,14 @@ namespace AS.Data
         /// <returns></returns>
         public async Task<IQueryable<TEntity>> GetAll( bool asNoTracking = false)
         {
-            return asNoTracking
-                ? _dbSet.AsNoTracking()
-                : _dbSet;
+            using(var context = new EfDbContext())
+            {
+               var dbSet = _context.Set<TEntity>();
+                    return asNoTracking
+               ? dbSet.AsNoTracking()
+               : dbSet;
+            }
+       
         }
 
         /// <summary>

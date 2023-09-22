@@ -24,10 +24,6 @@ namespace AS.Data.Configurations
             builder.Property(x => x.UpdateTime).IsRequired();
             builder.HasOne(x => x.UpdatedBy).WithMany(y => y.PermissionsUpdatedBy).IsRequired().OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(x => x.ActionStatus).WithMany(y => y.PermissionLines) .OnDelete(DeleteBehavior.Restrict); ;
-
-
-
             builder.Property(x => x.Name).IsRequired().HasColumnType("varchar(512)");
             builder.Property(x => x.Description).HasColumnType("varchar(512)");
             builder.Property(x => x.ControllerName).IsRequired().HasColumnType("varchar(512)");

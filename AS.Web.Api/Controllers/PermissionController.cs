@@ -55,7 +55,7 @@ namespace AS.Web.Api.Controllers
       
             try
             {
-                _permissionService.BaseUpdate(permissionDto);
+                var dger =_permissionService.BaseUpdate(permissionDto);
             }
             catch (Exception ex)
             {

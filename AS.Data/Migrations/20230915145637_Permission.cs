@@ -5,13 +5,20 @@
 namespace AS.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class PermissionAction : Migration
+    public partial class Permission : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
                 name: "ActionStatusId",
+                schema: "AS",
+                table: "Permissions",
+                type: "int",
+                nullable: true);
+
+            migrationBuilder.AddColumn<int>(
+                name: "CRUDActionType",
                 schema: "AS",
                 table: "Permissions",
                 type: "int",
@@ -46,8 +53,7 @@ namespace AS.Data.Migrations
                 column: "ActionStatusId",
                 principalSchema: "AS",
                 principalTable: "ActionStatus",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                principalColumn: "Id");
         }
 
         /// <inheritdoc />
@@ -69,6 +75,11 @@ namespace AS.Data.Migrations
 
             migrationBuilder.DropColumn(
                 name: "ActionStatusId",
+                schema: "AS",
+                table: "Permissions");
+
+            migrationBuilder.DropColumn(
+                name: "CRUDActionType",
                 schema: "AS",
                 table: "Permissions");
         }

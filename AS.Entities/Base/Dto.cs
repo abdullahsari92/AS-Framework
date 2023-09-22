@@ -24,7 +24,7 @@ namespace AS.Entities.Base
         /// <summary>
         /// Oluşturan kullanıcı
         /// </summary>
-        public virtual User? CreatedBy { get; set; }
+        public virtual string? CreatedByFullName { get; set; }
 
         /// <summary>
         /// Son değişiklik zamanı
@@ -34,7 +34,7 @@ namespace AS.Entities.Base
         /// <summary>
         /// Son değiştiren kullanıcı
         /// </summary>
-        public virtual  User? UpdatedBy { get; set; }
+        public virtual string? UpdatedByFullName { get; set; }
 
         /// <summary>
         /// Onaylı kayıt mı?
@@ -45,9 +45,10 @@ namespace AS.Entities.Base
     {
         public Guid Id { get; set; }
         public DateTime CreationTime { get; set; }
-        public User CreatedBy { get; set; }
+        public string CreatedByFullName { get; set; }
         public DateTime UpdateTime { get; set; }
-        public User UpdatedBy { get; set; }
+        public string UpdatedByFullName { get; set; }
+
         public bool IsApproved { get; set; }
     }
 }

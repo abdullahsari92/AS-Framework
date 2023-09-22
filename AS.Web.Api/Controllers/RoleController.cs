@@ -17,28 +17,28 @@ namespace AS.Web.Api.Controllers
             _roleManager = roleManager;
         }
 
-        
-       [HttpGet]
+
+        [HttpGet]
         public async Task<ActionResult<Core.IResult>> List()
         {
 
             var roleList = await _roleManager.BaseGetAll();
-                  
-          return  new SuccessDataResult<ListModel<RoleDto>>(roleList);
-           
+
+            return new SuccessDataResult<ListModel<RoleDto>>(roleList);
+
         }
 
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Core.IResult>> GetById( Guid Id)
+        public async Task<ActionResult<Core.IResult>> GetById(Guid Id)
         {
 
 
-            ListModel<PermissionModel> model = new ListModel<PermissionModel>();    
+            ListModel<PermissionModel> model = new ListModel<PermissionModel>();
             try
             {
-             model = await _roleManager.Get(Id);
+                model = await _roleManager.Get(Id);
 
                 return new SuccessDataResult<ListModel<PermissionModel>>(model);
 
@@ -52,49 +52,50 @@ namespace AS.Web.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Core.IResult>> Add([FromBody] RoleDto roleDto)
+        public async Task<ActionResult<Core.IResult>> Add([FromBody] RoleDto RoleDto)
         {
 
-
-            RoleDto model = new RoleDto();     
             try
             {
-                model = await _roleManager.BaseInsert(roleDto);
+                // roleAddModel.PermissionModel = await _roleManager.RolePermissionAdd(roleAddModel);
 
-             return   new SuccessDataResult<RoleDto>(model);              
+                 RoleDto = await _roleManager.BaseInsert(RoleDto);
+
+                return new SuccessDataResult<RoleDto>(RoleDto);
 
             }
             catch (Exception ex)
             {
-                        return new ErrorResult(ex.Message);              
+                return new ErrorResult(ex.Message);
 
             }
-       
+
         }
 
 
 
         [HttpPost]
-        public async Task<ActionResult<Core.IResult>> Update([FromBody] RoleDto roleDto)
+        public async Task<ActionResult<Core.IResult>> Update([FromBody] RoleUpdateModel roleUpdateModel)
         {
 
-               try
+            try
             {
-               var model = await _roleManager.BaseUpdate(roleDto);
+                roleUpdateModel.PermissionModel = await _roleManager.RolePermissionAdd(roleUpdateModel);
 
-                return new SuccessDataResult<RoleDto>(model);
+                roleUpdateModel.RoleDto = await _roleManager.BaseUpdate(roleUpdateModel.RoleDto);
+
+                return new SuccessDataResult<RoleUpdateModel>(roleUpdateModel);
             }
             catch (Exception ex)
-            {  
+            {
                 return new ErrorResult(ex.Message);
             }
 
-         
+
         }
 
-
-        [HttpPost]
-        public IActionResult Delete([FromBody] Guid Id)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid Id)
         {
 
             try

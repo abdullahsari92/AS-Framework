@@ -38,8 +38,12 @@ namespace AS.Business.AutoMapperProfile
          .ForMember(x => x.CreatedBy, opt => opt.Ignore())
           .ReverseMap();
 
+          //  .ForMember(x => x.UniqueId, opt => opt.MapFrom(p => $"{p.StoreId}_{p.SkuId}")).ReverseMap();
 
-            CreateMap<Permission, PermissionDto>().ReverseMap();
+
+            CreateMap<Permission, PermissionDto>()
+                  .ForMember(x => x.CreatedByFullName, opt => opt.MapFrom(p => $"{p.CreatedBy.FirstName} {p.CreatedBy.LastName}"))
+                  .ReverseMap();
 
            // CreateMap<Language, LanguageDto >().ReverseMap();
 

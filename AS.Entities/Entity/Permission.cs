@@ -1,4 +1,5 @@
 using AS.Entities.Base;
+using AS.Entities.Enums;
 
 namespace AS.Entities.Entity
 {
@@ -13,8 +14,7 @@ namespace AS.Entities.Entity
         public string ControllerName { get; set; }
         public string ActionName { get; set; }
 
-        public int ActionStatusId { get; set; }
-        public ActionStatus ActionStatus { get; set; }
+        public int CRUDActionType { get; set; }
         public virtual ICollection<RolePermissionLine> RolePermissionLines { get; set; }
         public virtual ICollection<PermissionMenuLine> PermissionMenuLines { get; set; }
 

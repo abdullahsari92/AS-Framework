@@ -23,8 +23,8 @@ namespace AS.Data.Configurations
             builder.HasOne(x => x.UpdatedBy).WithMany(y => y.RolePermissionLinesUpdatedBy).IsRequired().OnDelete(DeleteBehavior.Restrict);
 
 
-            builder.HasOne(x => x.Role).WithMany(y => y.RolePermissionLines).IsRequired().OnDelete(DeleteBehavior.Restrict);
-            builder.HasOne(x => x.Permission).WithMany(y => y.RolePermissionLines).IsRequired().OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Role).WithMany(y => y.RolePermissionLines).IsRequired().HasForeignKey(x => x.RoleId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Permission).WithMany(y => y.RolePermissionLines).IsRequired().HasForeignKey(x => x.PermissionId).OnDelete(DeleteBehavior.Restrict);
 
 
         }

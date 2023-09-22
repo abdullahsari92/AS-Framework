@@ -1,24 +1,22 @@
 ﻿using AS.Entities.Dtos;
+using AS.Entities.Enums;
 
 namespace AS.Entities.Entity
 {
     public class PermissionModel 
     {
-
         public PermissionModel()
         {
-
-            Value = new List<PermissionDto>();
-
+            ControllerCrudList = new List<PermissionCrudSelected>();
         }
 
-        public string Key { get; set; }
+        public bool Checked { get; set; }
+
+        public string ControllerName { get; set; }
+
+        public List<PermissionCrudSelected> ControllerCrudList { get; set; }
 
 
-        public List<PermissionDto> Value { get; set; }
-
-  
-
-}
+    }
 
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AS.Data.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    [Migration("20230823120136_PermissionAction")]
-    partial class PermissionAction
+    [Migration("20230915145637_Permission")]
+    partial class Permission
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -161,7 +161,10 @@ namespace AS.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(512)");
 
-                    b.Property<int>("ActionStatusId")
+                    b.Property<int?>("ActionStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CRUDActionType")
                         .HasColumnType("int");
 
                     b.Property<string>("ControllerName")
@@ -469,11 +472,9 @@ namespace AS.Data.Migrations
 
             modelBuilder.Entity("AS.Entities.Entity.Permission", b =>
                 {
-                    b.HasOne("AS.Entities.Entity.ActionStatus", "ActionStatus")
+                    b.HasOne("AS.Entities.Entity.ActionStatus", null)
                         .WithMany("PermissionLines")
-                        .HasForeignKey("ActionStatusId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ActionStatusId");
 
                     b.HasOne("AS.Entities.Entity.User", "CreatedBy")
                         .WithMany("PermissionsCreatedBy")
@@ -486,8 +487,6 @@ namespace AS.Data.Migrations
                         .HasForeignKey("UpdatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("ActionStatus");
 
                     b.Navigation("CreatedBy");
 

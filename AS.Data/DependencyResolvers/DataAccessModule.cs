@@ -14,6 +14,8 @@ namespace AS.Data.DependencyResolvers
             
             services.AddScoped<IRepository<User>, Repository<User>>();
             services.AddScoped<IRepository<Permission>, Repository<Permission>>();
+            services.AddScoped<IRepository<RolePermissionLine>, Repository<RolePermissionLine>>();
+
 
             services.AddScoped<IRepository<RoleUserLine>, Repository<RoleUserLine>>();
 
