@@ -1,7 +1,7 @@
 ﻿using AS.Entities.Dtos;
 using AS.Entities.Enums;
 
-namespace AS.Entities.Entity
+namespace AS.Entities.Models
 {
     public class PermissionModel 
     {

@@ -2,6 +2,7 @@
 using AS.Core.ValueObjects;
 using AS.Entities.Dtos;
 using AS.Entities.Entity;
+using AS.Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AS.Web.Api.Controllers
@@ -34,13 +35,14 @@ namespace AS.Web.Api.Controllers
         public async Task<ActionResult<Core.IResult>> GetById(Guid Id)
         {
 
+            RoleDetailModel model  = new RoleDetailModel();
 
-            ListModel<PermissionModel> model = new ListModel<PermissionModel>();
+            //ListModel<PermissionModel> model = new ListModel<PermissionModel>();
             try
             {
                 model = await _roleManager.Get(Id);
 
-                return new SuccessDataResult<ListModel<PermissionModel>>(model);
+                return new SuccessDataResult<RoleDetailModel>(model);
 
             }
             catch (Exception ex)
@@ -75,16 +77,16 @@ namespace AS.Web.Api.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<Core.IResult>> Update([FromBody] RoleUpdateModel roleUpdateModel)
+        public async Task<ActionResult<Core.IResult>> Update([FromBody] RoleDetailModel roleUpdateModel)
         {
 
             try
             {
-                roleUpdateModel.PermissionModel = await _roleManager.RolePermissionAdd(roleUpdateModel);
+                roleUpdateModel.PermissionList = await _roleManager.RolePermissionAdd(roleUpdateModel);
 
                 roleUpdateModel.RoleDto = await _roleManager.BaseUpdate(roleUpdateModel.RoleDto);
 
-                return new SuccessDataResult<RoleUpdateModel>(roleUpdateModel);
+                return new SuccessDataResult<RoleDetailModel>(roleUpdateModel);
             }
             catch (Exception ex)
             {

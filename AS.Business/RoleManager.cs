@@ -5,6 +5,7 @@ using AS.Core.ValueObjects;
 using AS.Entities.Dtos;
 using AS.Entities.Entity;
 using AS.Entities.Enums;
+using AS.Entities.Models;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
@@ -25,24 +26,22 @@ namespace AS.Business
         }
 
 
-        public async Task<ListModel<PermissionModel>> Get(Guid roleId)
+        public async Task<RoleDetailModel> Get(Guid roleId)
         {
 
             var rolePermissionList = await _rolePermissionRepository.GetAll();
 
-            var userPermission = rolePermissionList.Include(p=>p.Role).Where(p => p.Role.Id == roleId).Select(p => p.Permission); ;
-              
+            var userPermission = rolePermissionList.Include(p=>p.Role).Where(p => p.Role.Id == roleId).Select(p => p.Permission);
+
+            RoleDetailModel model = new RoleDetailModel();
+
+            model.RoleDto = await BaseGetById(roleId);
 
             var listModel = new List<IGrouping<string, Permission>>();
 
             var query = await _permissionRepository.GetAll();
 
-            var permissionModelList = new ListModel<PermissionModel>()
-            {
-                Items = new List<PermissionModel>
-                {
-                }
-            };
+            var permissionModelList = new List<PermissionModel>() {};
 
 
 
@@ -68,15 +67,18 @@ namespace AS.Business
                     permissionModel.ControllerCrudList.Add(permissionCrudSelected);
                 }
 
-                permissionModelList.Items.Add(permissionModel);
+                permissionModelList.Add(permissionModel);
 
             }
-           
-            return permissionModelList;
+
+            model.PermissionList = permissionModelList;
+
+
+            return model;
         }
 
 
-        public async Task<List<PermissionModel>> RolePermissionAdd(RoleUpdateModel roleAddModel)
+        public async Task<List<PermissionModel>> RolePermissionAdd(RoleDetailModel roleAddModel)
         {
             var query = await _permissionRepository.GetAll();
 
@@ -86,7 +88,7 @@ namespace AS.Business
             if (sonuc)
             {
 
-                foreach (var item in roleAddModel.PermissionModel.Where(p=>p.Checked))
+                foreach (var item in roleAddModel.PermissionList.Where(p=>p.Checked))
                 {
                     var CRUDActionTypeList = item.ControllerCrudList.Where(s => s.Checked).Select(m => m.CRUDActionType);
 
@@ -107,7 +109,7 @@ namespace AS.Business
                 }
             }
 
-            return roleAddModel.PermissionModel;
+            return roleAddModel.PermissionList;
         }
 
         public async Task<bool> RolePermissionDelete(Guid roleId)
@@ -128,14 +130,14 @@ namespace AS.Business
             return sonuc;
         }
 
-        public async Task<List<PermissionModel>> RolePermissionUpdate(RoleUpdateModel roleAddModel)
+        public async Task<List<PermissionModel>> RolePermissionUpdate(RoleDetailModel roleAddModel)
         {
             _rolePermissionRepository.Delete(roleAddModel.RoleDto.Id);
 
 
             RolePermissionAdd(roleAddModel);
 
-            return roleAddModel.PermissionModel;
+            return roleAddModel.PermissionList;
         }
 
 

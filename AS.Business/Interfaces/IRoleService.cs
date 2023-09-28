@@ -2,6 +2,7 @@ using AS.Core;
 using AS.Core.ValueObjects;
 using AS.Entities.Dtos;
 using AS.Entities.Entity;
+using AS.Entities.Models;
 
 namespace AS.Business.Interfaces
 {
@@ -9,9 +10,9 @@ namespace AS.Business.Interfaces
     {
         // Task<ListModel<PermissionDto>> Get(Guid roleId);
 
-        Task<ListModel<PermissionModel>> Get(Guid roleId);
+        Task<RoleDetailModel> Get(Guid roleId);
 
-        Task<List<PermissionModel>> RolePermissionAdd(RoleUpdateModel roleAddModel);
+        Task<List<PermissionModel>> RolePermissionAdd(RoleDetailModel roleAddModel);
 
 
     }
