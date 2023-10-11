@@ -28,6 +28,8 @@ namespace AS.Business
 
         public async Task<RoleDetailModel> Get(Guid roleId)
         {
+            GetPermissionClaims(roleId);
+
 
             var rolePermissionList = await _rolePermissionRepository.GetAll();
 
@@ -75,6 +77,27 @@ namespace AS.Business
 
 
             return model;
+        }
+
+
+        public async Task<string> GetPermissionClaims(Guid roleId)
+        {
+
+            var rolePermissionList = await _rolePermissionRepository.GetAll();
+
+            var userPermission = rolePermissionList.Include(p => p.Role).Where(p => p.Role.Id == roleId).Select(p => p.Permission);
+
+            string claims = "";
+
+            foreach (var item in userPermission)
+            {
+                var permissionModel = new PermissionModel();
+
+                claims += item.ControllerName +"." + Enum.GetName(typeof(CRUDActionType), item.CRUDActionType);
+                claims += ","; 
+            }
+
+            return claims;
         }
 
 

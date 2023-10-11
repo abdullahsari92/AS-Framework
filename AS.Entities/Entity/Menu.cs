@@ -33,10 +33,13 @@ namespace AS.Entities.Entity
         /// </summary>
         public int DisplayOrder { get; set; }
 
+        public Guid ParentId { get; set; }
+
+
         /// <summary>
         /// Menunun üst menusu
         /// </summary>
-        public virtual Menu ParentMenu { get; set; }
+        public virtual Menu Parent { get; set; }
 
 
         /// <summary>

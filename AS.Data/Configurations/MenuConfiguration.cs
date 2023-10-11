@@ -30,6 +30,6 @@ internal class MenuConfiguration : IEntityTypeConfiguration<Menu>
         builder.HasOne(x => x.UpdatedBy).WithMany(y => y.MenusUpdatedBy).IsRequired().HasForeignKey(x => x.UpdatedById).OnDelete(DeleteBehavior.Restrict);
 
    
-        builder.HasOne(x => x.ParentMenu).WithMany(y => y.ChildMenus).IsRequired().OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(x => x.Parent).WithMany(y => y.ChildMenus).HasForeignKey(x => x.ParentId).IsRequired().OnDelete(DeleteBehavior.Restrict);
     }
 }
