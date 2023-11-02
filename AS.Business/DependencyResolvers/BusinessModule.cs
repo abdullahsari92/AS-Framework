@@ -14,6 +14,8 @@ namespace AS.Business.DependencyResolvers
             services.AddTransient<IRoleService, RoleManager>();
             services.AddTransient<ILanguageService, LanguageManager>();
             services.AddTransient<IMenuService, MenuManager>();
+            services.AddTransient<IAuthService, AuthManager>();
+
 
 
 

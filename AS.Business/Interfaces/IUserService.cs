@@ -7,8 +7,8 @@ using AS.Entities.Entity;
 namespace AS.Business.Interfaces
 {
     public interface IUserService: IBaseService<User,UserDto>
-    {       
-        List<RoleUserLine> GetRoleUser(Guid userId);
+    {
+        Task<List<Role>> GetRoleUser(Guid userId);
 
 
 

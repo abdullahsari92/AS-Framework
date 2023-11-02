@@ -4,6 +4,7 @@ using AS.Core.ValueObjects;
 using AS.Entities.Base;
 using AS.Entities.Dtos;
 using AS.Entities.Entity;
+using AS.Entities.Simple;
 
 namespace AS.Business.Interfaces
 {
@@ -18,6 +19,13 @@ namespace AS.Business.Interfaces
         /// <param name="filterModel">Filtreleme Ýçin Sýnýf</param>
         /// <returns>T türünden liste modeli</returns>
         Task<ListModel<TMapTo>> BaseGetAll();
+
+        /// <summary>
+        /// Selectbox doldurmak için kullanýlabilir.
+        /// </summary>
+        /// <param name="filterModel">Filtreleme Ýçin Sýnýf</param>
+        /// <returns>T türünden liste modeli</returns>
+        Task<List<NameValue>> BaseGetSelectOptions();
 
         /// <summary>
         /// ID parametresi alarak tek satýr içeren detay modelini döndürür.

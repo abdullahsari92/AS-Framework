@@ -2,6 +2,7 @@
 using AS.Entities.Base;
 using AS.Entities.Dtos;
 using AS.Entities.Entity;
+using AS.Entities.Simple;
 using AutoMapper;
 
 namespace AS.Business.AutoMapperProfile
@@ -45,7 +46,11 @@ namespace AS.Business.AutoMapperProfile
                   .ForMember(x => x.CreatedByFullName, opt => opt.MapFrom(p => $"{p.CreatedBy.FirstName} {p.CreatedBy.LastName}"))
                   .ReverseMap();
 
-           // CreateMap<Language, LanguageDto >().ReverseMap();
+            CreateMap<Role, NameValue>()
+           .ForMember(x => x.Name, opt => opt.MapFrom(p => p.Name))
+           .ForMember(x => x.Value, opt => opt.MapFrom(p => p.Id))
+           .ReverseMap();
+            // CreateMap<Language, LanguageDto >().ReverseMap();
 
             CreateMap<Menu, MenuDto>().ReverseMap();
 
