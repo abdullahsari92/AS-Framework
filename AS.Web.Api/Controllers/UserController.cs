@@ -2,12 +2,14 @@
 using AS.Core.ValueObjects;
 using AS.Entities.Dtos;
 using AS.Entities.Entity;
+using AS.Web.Api.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AS.Web.Api.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [ASAuthorize]
     public class UserController : ControllerBase
     {
 
@@ -31,6 +33,25 @@ namespace AS.Web.Api.Controllers
            
         }
 
+
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Core.IResult>> GetById(Guid Id)
+        {
+            try
+            {
+               var model = await _userManager.GetById(Id);
+
+                return new SuccessDataResult<UserDto>(model);
+
+            }
+            catch (Exception ex)
+            {
+                return new ErrorResult(ex.Message);
+
+            }
+
+        }
 
         [HttpPost]
         public async Task<ActionResult<Core.IResult>> Add([FromBody] UserDto userDto)
@@ -61,7 +82,9 @@ namespace AS.Web.Api.Controllers
 
                try
             {
-               var model = await _userManager.BaseUpdate(userDto);
+                UserDto model = new UserDto();
+
+                _userManager.Update(userDto);
 
                 return new SuccessDataResult<UserDto>(model);
             }

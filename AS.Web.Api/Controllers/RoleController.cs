@@ -3,10 +3,13 @@ using AS.Core.ValueObjects;
 using AS.Entities.Dtos;
 using AS.Entities.Entity;
 using AS.Entities.Models;
+using AS.Entities.Simple;
+using AS.Web.Api.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AS.Web.Api.Controllers
 {
+    [ASAuthorize]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class RoleController : ControllerBase
@@ -93,6 +96,16 @@ namespace AS.Web.Api.Controllers
                 return new ErrorResult(ex.Message);
             }
 
+
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<Core.IResult>> SelectOption()
+        {
+
+            var roleList = await _roleManager.BaseGetSelectOptions();
+
+            return new SuccessDataResult<List<NameValue>>(roleList);
 
         }
 

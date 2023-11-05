@@ -2,12 +2,15 @@
 using AS.Core.ValueObjects;
 using AS.Entities.Dtos;
 using AS.Entities.Entity;
+using AS.Web.Api.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AS.Web.Api.Controllers
 {
+
     [Route("api/[controller]/[action]")]
     [ApiController]
+   // [ASAuthorize]
     public class LanguageController : ControllerBase
     {
 
@@ -19,6 +22,8 @@ namespace AS.Web.Api.Controllers
 
         
         [HttpGet]
+        [ASAuthorize]
+
         public async Task<ActionResult<Core.IResult>> List()
         {
 
