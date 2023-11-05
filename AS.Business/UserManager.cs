@@ -12,18 +12,11 @@ namespace AS.Business
 {
     public class UserManager :BaseManager<User,UserDto>, IUserService
     {
-      //  public readonly IRepository<User> _repository;
+       public readonly IRepository<RoleUserLine> _roleUserLineRepository;
 
-      
-    
-        //   private readonly IValidationManager<User> _userValidator;
-        //private readonly IBirimService _birimService;
-
-        public UserManager(IRepository<User> repositoryUser, IMapper mapper):base(repositoryUser, mapper)
+        public UserManager(IRepository<User> repositoryUser, IMapper mapper, IRepository<RoleUserLine> roleUserLine) : base(repositoryUser, mapper)
         {
-       
-          //  _repository = repositoryUser;
-           
+            _roleUserLineRepository = roleUserLine;
         }
 
         public async Task<ListModel<UserDto>> GetAll()
@@ -41,20 +34,24 @@ namespace AS.Business
     
         public async Task<UserDto> GetById(Guid id)
         {
+            var userQuery = await _repository.GetAll();
 
-            var user = await _repository.GetAsync(p => p.Id == id);
+            var user = userQuery.Include(p => p.RoleUserLines).FirstOrDefault(p => p.Id == id);
 
             var userDto = _mapper.Map(user, new UserDto());
+
+            userDto.RoleIds = user.RoleUserLines.Select(p => p.RoleId.ToString().ToUpper()).ToList();
 
             return userDto;
         }
 
-        public List<RoleUserLine> GetRoleUser(Guid userId)
+        public async Task<List<Role>> GetRoleUser(Guid userId)
         {
-            //return _repositoryRoleUser.GetAll().Where(x => x.Id == userId).ToList();
+            var roleLine = await _roleUserLineRepository.GetAll(x => x.User.Id == userId);
 
-            return null;
-                
+            var roles = await roleLine.Select(m => m.Role).ToListAsync();
+            ;
+            return roles;
         }
 
 
@@ -74,13 +71,38 @@ namespace AS.Business
             return _mapper.Map(await _repository.InsertAsync(user), new UserDto());
         }
 
-        public void Update(UserDto userDto)
+        public async void Update(UserDto userDto)
         {
               
             var user = _repository.Get(p=>p.Id ==userDto.Id);
 
             user = _mapper.Map(userDto, user);         
              _repository.Update(user);
+
+
+            if(userDto.RoleIds.Count() >0)
+            {
+                List<RoleUserLine> lineList = new();
+
+                #region tüm roller siliniyor           
+                    var userLineRole = await  _roleUserLineRepository.GetAll(p => p.UserId == userDto.Id);
+                    _roleUserLineRepository.DeleteRange(userLineRole);
+                #endregion
+
+                foreach (var item in userDto.RoleIds)
+                {
+                   var roleLine = new RoleUserLine()
+                        {
+                            UserId = userDto.Id,
+                            RoleId = new Guid(item),
+                            Id = Guid.NewGuid(),
+                             IsApproved = true
+                    };
+                    roleLine = BaseEntityHelper.SetBaseEntitiy(roleLine);
+                    lineList.Add(roleLine);
+                }
+                _roleUserLineRepository.InsertRange(lineList);
+            }
         }
 
         public void Delete(Guid id)

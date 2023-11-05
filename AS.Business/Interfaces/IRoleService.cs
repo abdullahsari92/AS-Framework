@@ -14,6 +14,6 @@ namespace AS.Business.Interfaces
 
         Task<List<PermissionModel>> RolePermissionAdd(RoleDetailModel roleAddModel);
 
-        Task<string> GetPermissionClaims(Guid roleId);
+        Task<string> GetPermissionClaims(List<Guid> roleIds);
     }
 }

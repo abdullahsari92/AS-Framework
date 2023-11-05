@@ -69,6 +69,9 @@ namespace AS.Core
         void InsertRange(IEnumerable<TEntity> entities, bool autoSaveIsNotActive = false);
 
 
+        void InsertRangeAsync(IEnumerable<TEntity> entities, bool autoSaveIsNotActive = false);
+
+
         /// <summary>
         ///  Async olarak yeni kayıt ekler. Eklenen kaydı geri döndürür.
         /// </summary>

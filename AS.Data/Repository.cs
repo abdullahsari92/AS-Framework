@@ -100,13 +100,20 @@ namespace AS.Data
         /// <returns></returns>
         public async Task<IQueryable<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter, bool asNoTracking = false)
         {
-            using var context = new EfDbContext();
-             var  _dbSet = context.Set<TEntity>();
+            //using var context = new EfDbContext();
+            // var  _dbSet = context.Set<TEntity>();
+            //return asNoTracking
+            //    ? _dbSet.Where(filter).AsNoTracking()
+            //    : _dbSet.Where(filter);
 
+            using (var context = new EfDbContext())
+            {
+                var dbSet = _context.Set<TEntity>();
+                return asNoTracking
+               ? dbSet.Where(filter).AsNoTracking()
+               : dbSet.Where(filter);
+            }
 
-            return asNoTracking
-                ? _dbSet.Where(filter).AsNoTracking()
-                : _dbSet.Where(filter);
         }
 
 
@@ -138,6 +145,14 @@ namespace AS.Data
             if (!autoSaveIsNotActive)
             {
                 _context.SaveChanges();
+            }
+        }
+        public async void InsertRangeAsync(IEnumerable<TEntity> entities, bool autoSaveIsNotActive = false)
+        {
+            _dbSet.AddRangeAsync(entities);
+            if (!autoSaveIsNotActive)
+            {
+                await SaveChangesAsync();
             }
         }
         public async Task<TEntity> InsertAsync(TEntity entity, bool autoSaveIsNotActive = false)

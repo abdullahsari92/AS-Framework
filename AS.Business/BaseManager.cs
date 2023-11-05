@@ -5,6 +5,7 @@ using AS.Core.ValueObjects;
 using AS.Entities.Base;
 using AS.Entities.Dtos;
 using AS.Entities.Entity;
+using AS.Entities.Simple;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,15 @@ namespace AS.Business
             return listModel;
         }
 
+        public async Task<List<NameValue>> BaseGetSelectOptions()
+        {
+            var listModel = new List<NameValue>();
+            var entitys = await _repository.GetAll();
+            listModel = await entitys.ProjectTo<NameValue>(_mapper.ConfigurationProvider).ToListAsync();
+
+
+            return listModel;
+        }
         public async Task<TMapTo?> BaseGetById(Guid id)
         {
             var entity = await _repository.GetAsync(p=>p.Id == id);

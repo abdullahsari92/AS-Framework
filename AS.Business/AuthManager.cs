@@ -65,10 +65,10 @@ namespace AS.Business
             }
             var claims = await GetClaims(model);
                var token =  await GenerateJwt(claims);
-            var userRoles = claims.Where(x => x.Type == ClaimTypes.Role).FirstOrDefault().Value; //þimdilik tek role olarak hesaplandý
+            var userRoles = claims.Where(x => x.Type == ClaimTypes.Role).Select(p=> new Guid(p.Value)).ToList(); //þimdilik tek role olarak hesaplandý
 
            
-            var getPermissionClaims = await _roleService.GetPermissionClaims(new Guid(userRoles));
+            var getPermissionClaims = await _roleService.GetPermissionClaims(userRoles);
 
             AuthModel authModel = new()
             {

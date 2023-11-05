@@ -19,8 +19,8 @@ internal class RoleUserLineConfiguration : IEntityTypeConfiguration<RoleUserLine
         builder.Property(x => x.CreationTime).IsRequired();
         builder.Property(x => x.UpdateTime).IsRequired();
        
-        builder.HasOne(x => x.Role).WithMany(y => y.RoleUserLines).IsRequired().OnDelete(DeleteBehavior.Restrict);
-        builder.HasOne(x => x.User).WithMany(y => y.RoleUserLines).IsRequired().OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(x => x.Role).WithMany(y => y.RoleUserLines).HasForeignKey(p=>p.RoleId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(x => x.User).WithMany(y => y.RoleUserLines).IsRequired().HasForeignKey(p => p.UserId).OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(p => p.CreatedBy).WithMany(t => t.RoleUserLinesCreatedBy).HasForeignKey(x => x.CreatedById).OnDelete(DeleteBehavior.Restrict);
 

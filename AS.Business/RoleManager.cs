@@ -28,7 +28,7 @@ namespace AS.Business
 
         public async Task<RoleDetailModel> Get(Guid roleId)
         {
-            GetPermissionClaims(roleId);
+            //GetPermissionClaims(roleId);
 
 
             var rolePermissionList = await _rolePermissionRepository.GetAll();
@@ -80,12 +80,12 @@ namespace AS.Business
         }
 
 
-        public async Task<string> GetPermissionClaims(Guid roleId)
+        public async Task<string> GetPermissionClaims(List<Guid> roleIds)
         {
 
             var rolePermissionList = await _rolePermissionRepository.GetAll();
 
-            var userPermission = rolePermissionList.Include(p => p.Role).Where(p => p.Role.Id == roleId).Select(p => p.Permission);
+            var userPermission = rolePermissionList.Include(p => p.Role).Where(p => roleIds.Contains(p.Role.Id)).Select(p => p.Permission);
 
             string claims = "";
 

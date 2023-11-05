@@ -1,6 +1,4 @@
-﻿using AS.Entities.Base;
-using AS.Entities.Enums;
-
+﻿
 namespace AS.Entities.Dtos
 {
     public class PermissionCrudSelected
