@@ -19,6 +19,12 @@ namespace AS.Business.AutoMapperProfile
                 .ForMember(x => x.CreationTime, opt => opt.Ignore())
                 .ForMember(x => x.CreatedBy, opt => opt.Ignore())
                  .ReverseMap();
+            CreateMap<Student, StudentDto>().ReverseMap();
+            CreateMap<StudentDto, Student>()
+                .ForMember(x => x.CreatedById, opt => opt.Ignore())
+                .ForMember(x => x.CreationTime, opt => opt.Ignore())
+                .ForMember(x => x.CreatedBy, opt => opt.Ignore())
+                 .ReverseMap();
 
 
             CreateMap<LanguageDto, Language>()
@@ -43,7 +49,7 @@ namespace AS.Business.AutoMapperProfile
 
 
             CreateMap<Permission, PermissionDto>()
-                  .ForMember(x => x.CreatedByFullName, opt => opt.MapFrom(p => $"{p.CreatedBy.FirstName} {p.CreatedBy.LastName}"))
+                  .ForMember(x => x.CreatedByFullName, opt => opt.MapFrom(p => $"{p.CreatedBy.Username}"))
                   .ReverseMap();
 
             CreateMap<Role, NameValue>()

@@ -26,6 +26,16 @@ namespace AS.Business
         }
 
 
+        public async Task<ListModel<RoleDto>> GetAll()
+        {
+            var listModel = new ListModel<RoleDto>();
+
+            var list = await _repository.GetAll();
+            listModel.Items = await list.ProjectTo<RoleDto>(_mapper.ConfigurationProvider).OrderBy(p=>p.Level).ToListAsync();
+
+            return listModel;
+        }
+
         public async Task<RoleDetailModel> Get(Guid roleId)
         {
             //GetPermissionClaims(roleId);
@@ -139,18 +149,21 @@ namespace AS.Business
         {
 
            var query = await _rolePermissionRepository.GetAll();
-            foreach (var item in query.Where(p=>p.RoleId == roleId).ToList())
+
+            var roleList = query.Where(p => p.RoleId == roleId).ToList();
+
+            if (roleList.Count()==0)
+            {
+                return true;
+            }
+            foreach (var item in roleList)
             {
 
                 _rolePermissionRepository.DeleteAsync(item,true);
 
             }
-           bool  sonuc = await _rolePermissionRepository.SaveChangesAsync() != 0;
+       return await _rolePermissionRepository.SaveChangesAsync() != 0;
 
-
-
-
-            return sonuc;
         }
 
         public async Task<List<PermissionModel>> RolePermissionUpdate(RoleDetailModel roleAddModel)

@@ -4,14 +4,13 @@ namespace AS.Entities.Entity
 {
     public class User : BaseEntity
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string DisplayName => FirstName + " " + LastName;
+
         public string Username { get; set; }
         public string Password { get; set; }
-        public string Email { get; set; }
-
-
+        public string Email { get; set; }  
+        public int UserType { get; set; }
+        public Student? Student { get; set; }
+        public Person? Person { get; set; }
 
         public virtual ICollection<RoleUserLine> RoleUserLines { get; set; }
 
@@ -20,6 +19,18 @@ namespace AS.Entities.Entity
         public virtual ICollection<User> UsersUpdatedBy { get; set; }
 
         public virtual ICollection<Role> RolesCreatedBy { get; set; }
+
+        public virtual ICollection<Student> StudentsCreatedBy { get; set; }
+        public virtual ICollection<Student> StudentsUpdatedBy { get; set; }
+
+        public virtual ICollection<Faculty> FacultiesCreatedBy { get; set; }
+        public virtual ICollection<Faculty> FacultiesUpdatedBy { get; set; }
+
+        public virtual ICollection<Department> DepartmentsCreatedBy { get; set; }
+        public virtual ICollection<Department> DepartmentsUpdatedBy { get; set; }
+
+        public virtual ICollection<Person> PersonsCreatedBy { get; set; }
+        public virtual ICollection<Person> PersonsUpdatedBy { get; set; }
 
         public virtual ICollection<Menu> MenusUpdatedBy { get; set; }
 

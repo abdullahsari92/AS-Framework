@@ -24,8 +24,10 @@ namespace AS.Business
          
             var listModel =  new ListModel<UserDto>();
             var users = await _repository.GetAll();
-           
-            listModel.Items = await users.ProjectTo<UserDto>(_mapper.ConfigurationProvider).ToListAsync();
+
+            var dd = users.Include(p => p.Student).ToList();
+
+            listModel.Items = await users.Include(p=>p.Student).ProjectTo<UserDto>(_mapper.ConfigurationProvider).ToListAsync();
 
 
                 

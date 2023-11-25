@@ -75,7 +75,7 @@ namespace AS.Business
                  Claims = getPermissionClaims,
                  Token = token,
                  Email = user.Email,
-                 FullName = user.FirstName + " "+ user.LastName,
+                 FullName = user.Username,
             };
 
 

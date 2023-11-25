@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
@@ -40,8 +41,18 @@ builder.Services.AddDependencyResolvers(new ICoreModule[]
 builder.Services.AddHttpClient();
 
 // Add services to the container.
-string configuration = builder.Configuration.GetConnectionString("MsSqlConnection");
-builder.Services.AddDbContext<EfDbContext>(options => options.UseSqlServer(configuration), ServiceLifetime.Transient);
+
+string configuration = builder.Configuration.GetConnectionString("MySqlConnection");
+//builder.Services.AddDbContext<EfDbContext>(options => options.UseSqlServer(configuration));
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 33));
+
+builder.Services.AddDbContext<EfDbContext>(options => options.UseMySql(
+    configuration,
+    serverVersion,
+    o => o.SchemaBehavior(MySqlSchemaBehavior.Translate, (schema, table) => $"{schema}_{table}")));
+
+
+
 
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));

@@ -26,7 +26,7 @@ namespace AS.Web.Api.Controllers
         public async Task<ActionResult<Core.IResult>> List()
         {
 
-            var roleList = await _roleManager.BaseGetAll();
+            var roleList = await _roleManager.GetAll();
 
             return new SuccessDataResult<ListModel<RoleDto>>(roleList);
 
@@ -40,7 +40,6 @@ namespace AS.Web.Api.Controllers
 
             RoleDetailModel model  = new RoleDetailModel();
 
-            //ListModel<PermissionModel> model = new ListModel<PermissionModel>();
             try
             {
                 model = await _roleManager.Get(Id);

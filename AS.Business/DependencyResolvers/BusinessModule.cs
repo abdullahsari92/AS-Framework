@@ -17,6 +17,10 @@ namespace AS.Business.DependencyResolvers
             services.AddTransient<IAuthService, AuthManager>();
 
 
+            services.AddTransient<IStudentService, StudentManager>();
+
+
+
 
 
 

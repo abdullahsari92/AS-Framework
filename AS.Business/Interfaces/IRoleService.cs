@@ -10,6 +10,8 @@ namespace AS.Business.Interfaces
     {
         // Task<ListModel<PermissionDto>> Get(Guid roleId);
 
+        Task<ListModel<RoleDto>> GetAll();
+
         Task<RoleDetailModel> Get(Guid roleId);
 
         Task<List<PermissionModel>> RolePermissionAdd(RoleDetailModel roleAddModel);
